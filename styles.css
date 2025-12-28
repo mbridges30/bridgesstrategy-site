@@ -9,7 +9,7 @@
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 18px;
-  line-height: 1.6;
+  line-height: 1.7;
   color: #111;
   background: #fff;
 }
@@ -42,7 +42,7 @@ h1 {
 
 /* Sections */
 section {
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 }
 
 h2 {
