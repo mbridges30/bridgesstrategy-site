@@ -61,6 +61,11 @@ h2 {
   color: var(--accent);
 }
 
+.lead {
+  font-size: 1.05rem;
+  margin-top: 1.5rem;
+}
+
 
 p {
   margin-bottom: 1rem;
