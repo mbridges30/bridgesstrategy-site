@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Governance Gap Diagnostic | Bridges Strategy</title>
+  <meta name="description" content="A free interactive assessment that evaluates your nonprofit's AI governance maturity across visibility, policy, accountability, and board readiness.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Reset */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #4f8f9b;
+      --accent-light: #e8f1f3;
+      --accent-hover: #3d7a85;
+      --nascent: #c0392b;
+      --emerging: #e67e22;
+      --developing: #f1c40f;
+      --established: #27ae60;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      color: #111;
+      background: #f9fafa;
+      border-top: 3px solid var(--accent);
+    }
+
+    header, main, footer {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    header {
+      padding-top: 3rem;
+      padding-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    .logo { height: 60px; margin-bottom: 1.5rem; }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .lead {
+      font-size: 1.05rem;
+      margin-top: 0.5rem;
+      color: #555;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: var(--accent);
+      text-decoration: underline;
+    }
+    .back-link:hover { text-decoration: none; }
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    p { margin-bottom: 1rem; }
+
+    a { color: var(--accent); }
+
+    /* Progress bar */
+    .progress-bar {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .progress-step {
+      flex: 1;
+      text-align: center;
+      padding: 0.5rem 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #999;
+      border-bottom: 3px solid #ddd;
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    .progress-step.active {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .progress-step.completed {
+      color: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    /* Step panels */
+    .step-panel { display: none; }
+    .step-panel.active { display: block; }
+
+    /* Domain intro */
+    .domain-intro {
+      background: var(--accent-light);
+      padding: 1rem 1.25rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    /* Question card */
+    .question-card {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 6px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .question-text {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #111;
+    }
+
+    .answer-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .answer-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border: 2px solid #e8e8e8;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      min-height: 44px;
+    }
+
+    .answer-option:hover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .answer-option.selected {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .answer-option input[type="radio"] {
+      margin-top: 0.2rem;
+      accent-color: var(--accent);
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .answer-label {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      color: #333;
+    }
+
+    .answer-score {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    /* Navigation buttons */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 1.4rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 2px 8px rgba(79, 143, 155, 0.3);
+    }
+    .btn-primary:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn-secondary:hover {
+      background: var(--accent-light);
+    }
+
+    /* Validation message */
+    .validation-msg {
+      color: #c0392b;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .validation-msg.show { display: block; }
+
+    /* Review panel */
+    .review-domain {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 6px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .review-domain h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .review-domain h3 .edit-btn {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent);
+      cursor: pointer;
+      text-decoration: underline;
+      background: none;
+      border: none;
+    }
+
+    .review-item {
+      font-size: 0.9rem;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid #f0f0f0;
+      color: #333;
+    }
+
+    .review-item:last-child { border-bottom: none; }
+
+    .review-item strong { color: #111; }
+
+    /* Results panel */
+    .score-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .score-card {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+
+    .score-card h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+
+    .score-bar-bg {
+      height: 8px;
+      background: #eee;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.4rem;
+    }
+
+    .score-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.8s ease;
+    }
+
+    .score-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .overall-score {
+      text-align: center;
+      padding: 1.5rem;
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+    }
+
+    .overall-score .score-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .overall-score .score-out-of {
+      font-size: 1rem;
+      color: #999;
+    }
+
+    .overall-score .maturity-label {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* Report container */
+    .report-container {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 6px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .report-container h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .report-container h3:first-child { margin-top: 0; }
+
+    .report-container p {
+      margin-bottom: 0.75rem;
+      color: #333;
+    }
+
+    .report-container ul, .report-container ol {
+      padding-left: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .report-container li {
+      margin-bottom: 0.4rem;
+      color: #333;
+    }
+
+    /* Loading state */
+    .loading {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 4px solid #eee;
+      border-top: 4px solid var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    /* Error state */
+    .error-box {
+      background: #fdf2f2;
+      border: 1px solid #e8c8c8;
+      border-radius: 6px;
+      padding: 1.25rem;
+      color: #7a2828;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Action buttons at bottom */
+    .result-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #ddd;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+      text-align: center;
+    }
+
+    /* Conditional questions */
+    .question-card.hidden-conditional {
+      display: none;
+    }
+
+    .skip-notice {
+      background: #f4f4f4;
+      border: 1px dashed #ccc;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      color: #666;
+      display: none;
+    }
+
+    .skip-notice.show {
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body { font-size: 16px; }
+      h1 { font-size: 1.6rem; }
+      .progress-step { font-size: 0.65rem; padding: 0.4rem 0.1rem; }
+      .score-cards { grid-template-columns: 1fr; }
+      .nav-buttons { flex-direction: column; }
+      .nav-buttons .btn { width: 100%; text-align: center; }
+      .report-container { padding: 1.25rem; }
+      .result-actions { flex-direction: column; }
+      .result-actions .btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html"><img src="assets/logo.png" alt="Bridges Strategy logo" class="logo"></a>
+  <h1>AI Governance Gap Diagnostic</h1>
+  <p class="lead">
+    A free assessment for nonprofit leaders to evaluate AI governance maturity and receive a personalized gap report with recommended next steps.
+  </p>
+  <a href="index.html" class="back-link">&larr; Back to Bridges Strategy</a>
+</header>
+
+<main>
+
+  <!-- Progress bar -->
+  <div class="progress-bar" id="progressBar">
+    <div class="progress-step active" data-step="0">Visibility</div>
+    <div class="progress-step" data-step="1">Policy</div>
+    <div class="progress-step" data-step="2">Accountability</div>
+    <div class="progress-step" data-step="3">Board Readiness</div>
+    <div class="progress-step" data-step="4">Review</div>
+    <div class="progress-step" data-step="5">Results</div>
+  </div>
+
+  <!-- Step 0: Visibility -->
+  <div class="step-panel active" id="step-0">
+    <h2>Domain 1: Visibility</h2>
+    <div class="domain-intro">
+      Does your organization know where and how AI is being used by staff? Visibility is the foundation of governance — you cannot manage what you cannot see.
+    </div>
+
+    <div class="question-card" data-question="A1">
+      <div class="question-text">Does your organization have a clear picture of where AI tools are currently being used by staff?</div>
+      <div class="answer-options">
+        <label class="answer-option" onclick="selectAnswer('A1', 0, this)">
+          <input type="radio" name="A1" value="0">
+          <span><span class="answer-label">No awareness of AI tool usage across the organization</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('A1', 1, this)">
+          <input type="radio" name="A1" value="1">
+          <span><span class="answer-label">Anecdotal awareness only — some staff may be using AI but nothing is tracked</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('A1', 2, this)">
+          <input type="radio" name="A1" value="2">
+          <span><span class="answer-label">An informal inventory or partial understanding exists</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('A1', 3, this)">
+          <input type="radio" name="A1" value="3">
+          <span><span class="answer-label">A formal, maintained inventory of AI tools and their uses exists</span></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question-card" data-question="A2">
+      <div class="question-text">Are staff expected to disclose when they use AI tools in their work?</div>
+      <div class="answer-options">
+        <label class="answer-option" onclick="selectAnswer('A2', 0, this)">
+          <input type="radio" name="A2" value="0">
+          <span><span class="answer-label">No expectation to disclose</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('A2', 1, this)">
+          <input type="radio" name="A2" value="1">
+          <span><span class="answer-label">Informally encouraged but not required</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('A2', 2, this)">
+          <input type="radio" name="A2" value="2">
+          <span><span class="answer-label">A written expectation exists but is not consistently enforced</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('A2', 3, this)">
+          <input type="radio" name="A2" value="3">
+          <span><span class="answer-label">A written expectation exists and is actively enforced</span></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question-card" data-question="A3">
+      <div class="question-text">Do you know which AI vendors or platforms have access to your organization's data?</div>
+      <div class="answer-options">
+        <label class="answer-option" onclick="selectAnswer('A3', 0, this)">
+          <input type="radio" name="A3" value="0">
+          <span><span class="answer-label">No visibility into which vendors process our data</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('A3', 1, this)">
+          <input type="radio" name="A3" value="1">
+          <span><span class="answer-label">Vague awareness of some platforms being used</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('A3', 2, this)">
+          <input type="radio" name="A3" value="2">
+          <span><span class="answer-label">A partial list of AI vendors is maintained</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('A3', 3, this)">
+          <input type="radio" name="A3" value="3">
+          <span><span class="answer-label">A complete, regularly reviewed vendor list exists</span></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question-card" data-question="A4">
+      <div class="question-text">Has leadership discussed how AI is being used across departments in the past six months?</div>
+      <div class="answer-options">
+        <label class="answer-option" onclick="selectAnswer('A4', 0, this)">
+          <input type="radio" name="A4" value="0">
+          <span><span class="answer-label">Not discussed at all</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('A4', 1, this)">
+          <input type="radio" name="A4" value="1">
+          <span><span class="answer-label">Mentioned in passing but not formally addressed</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('A4', 2, this)">
+          <input type="radio" name="A4" value="2">
+          <span><span class="answer-label">Discussed in at least one structured conversation</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('A4', 3, this)">
+          <input type="radio" name="A4" value="3">
+          <span><span class="answer-label">Regular, structured discussions occur on this topic</span></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="validation-msg" id="validation-0">Please answer all questions before continuing.</div>
+    <div class="nav-buttons">
+      <span></span>
+      <button class="btn btn-primary" onclick="nextStep(0)">Next: Policy &rarr;</button>
+    </div>
+  </div>
+
+  <!-- Step 1: Policy -->
+  <div class="step-panel" id="step-1">
+    <h2>Domain 2: Policy</h2>
+    <div class="domain-intro">
+      Are there written policies governing how AI may and may not be used? Policy provides the guardrails that turn good intentions into consistent practice.
+    </div>
+
+    <div class="question-card" data-question="B1">
+      <div class="question-text">Does your organization have a written policy governing staff use of AI tools?</div>
+      <div class="answer-options">
+        <label class="answer-option" onclick="selectAnswer('B1', 0, this)">
+          <input type="radio" name="B1" value="0">
+          <span><span class="answer-label">No policy exists</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('B1', 1, this)">
+          <input type="radio" name="B1" value="1">
+          <span><span class="answer-label">Informal guidelines have been shared verbally or via email</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('B1', 2, this)">
+          <input type="radio" name="B1" value="2">
+          <span><span class="answer-label">A draft policy exists but has not been formally approved</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('B1', 3, this)">
+          <input type="radio" name="B1" value="3">
+          <span><span class="answer-label">An approved, distributed policy is in place</span></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="skip-notice" id="policySkipNotice">
+      Since your organization does not yet have an AI policy, the remaining policy questions have been skipped. Your report will include recommendations for getting started.
+    </div>
+
+    <div class="question-card" data-question="B2" data-conditional="B1">
+      <div class="question-text">Does the policy address which types of data may or may not be entered into AI tools?</div>
+      <div class="answer-options">
+        <label class="answer-option" onclick="selectAnswer('B2', 0, this)">
+          <input type="radio" name="B2" value="0">
+          <span><span class="answer-label">Data boundaries are not addressed at all</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('B2', 1, this)">
+          <input type="radio" name="B2" value="1">
+          <span><span class="answer-label">Mentioned informally but not documented</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('B2', 2, this)">
+          <input type="radio" name="B2" value="2">
+          <span><span class="answer-label">Partially addressed in a written document</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('B2', 3, this)">
+          <input type="radio" name="B2" value="3">
+          <span><span class="answer-label">Clearly defined data boundaries are documented and communicated</span></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question-card" data-question="B3" data-conditional="B1">
+      <div class="question-text">Does the policy cover external-facing AI use, such as communications or constituent interactions?</div>
+      <div class="answer-options">
+        <label class="answer-option" onclick="selectAnswer('B3', 0, this)">
+          <input type="radio" name="B3" value="0">
+          <span><span class="answer-label">External-facing use is not covered</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('B3', 1, this)">
+          <input type="radio" name="B3" value="1">
+          <span><span class="answer-label">Briefly mentioned but not scoped</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('B3', 2, this)">
+          <input type="radio" name="B3" value="2">
+          <span><span class="answer-label">Partially covered with some guidelines</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('B3', 3, this)">
+          <input type="radio" name="B3" value="3">
+          <span><span class="answer-label">Clearly scoped and enforced for all external-facing uses</span></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question-card" data-question="B4" data-conditional="B1">
+      <div class="question-text">Is there a defined process for reviewing and updating the AI policy?</div>
+      <div class="answer-options">
+        <label class="answer-option" onclick="selectAnswer('B4', 0, this)">
+          <input type="radio" name="B4" value="0">
+          <span><span class="answer-label">No review process exists</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('B4', 1, this)">
+          <input type="radio" name="B4" value="1">
+          <span><span class="answer-label">Updates happen ad hoc, without a schedule</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('B4', 2, this)">
+          <input type="radio" name="B4" value="2">
+          <span><span class="answer-label">An informal review cycle exists</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('B4', 3, this)">
+          <input type="radio" name="B4" value="3">
+          <span><span class="answer-label">A scheduled review process with clear ownership is in place</span></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="validation-msg" id="validation-1">Please answer all questions before continuing.</div>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="prevStep(1)">&larr; Back</button>
+      <button class="btn btn-primary" onclick="nextStep(1)">Next: Accountability &rarr;</button>
+    </div>
+  </div>
+
+  <!-- Step 2: Accountability -->
+  <div class="step-panel" id="step-2">
+    <h2>Domain 3: Accountability</h2>
+    <div class="domain-intro">
+      Is someone responsible for AI oversight, and are there processes for raising concerns? Accountability ensures that governance is not just aspirational but operational.
+    </div>
+
+    <div class="question-card" data-question="C1">
+      <div class="question-text">Is there a specific person or role responsible for AI oversight in your organization?</div>
+      <div class="answer-options">
+        <label class="answer-option" onclick="selectAnswer('C1', 0, this)">
+          <input type="radio" name="C1" value="0">
+          <span><span class="answer-label">No one is assigned to AI oversight</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('C1', 1, this)">
+          <input type="radio" name="C1" value="1">
+          <span><span class="answer-label">Informally assumed by someone but not officially designated</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('C1', 2, this)">
+          <input type="radio" name="C1" value="2">
+          <span><span class="answer-label">A named person exists but is not resourced or empowered for the role</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('C1', 3, this)">
+          <input type="radio" name="C1" value="3">
+          <span><span class="answer-label">A named, resourced, and empowered person or role is in place</span></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question-card" data-question="C2">
+      <div class="question-text">Is there a process for staff to raise concerns or report issues related to AI use?</div>
+      <div class="answer-options">
+        <label class="answer-option" onclick="selectAnswer('C2', 0, this)">
+          <input type="radio" name="C2" value="0">
+          <span><span class="answer-label">No process exists</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('C2', 1, this)">
+          <input type="radio" name="C2" value="1">
+          <span><span class="answer-label">Concerns are raised informally, word-of-mouth</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('C2', 2, this)">
+          <input type="radio" name="C2" value="2">
+          <span><span class="answer-label">A process exists but is not well known to staff</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('C2', 3, this)">
+          <input type="radio" name="C2" value="3">
+          <span><span class="answer-label">A clear, accessible process is in place and actively used</span></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question-card" data-question="C3">
+      <div class="question-text">Are there defined consequences or corrective actions for misuse of AI tools?</div>
+      <div class="answer-options">
+        <label class="answer-option" onclick="selectAnswer('C3', 0, this)">
+          <input type="radio" name="C3" value="0">
+          <span><span class="answer-label">No consequences are defined</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('C3', 1, this)">
+          <input type="radio" name="C3" value="1">
+          <span><span class="answer-label">Handled on a case-by-case basis without guidelines</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('C3', 2, this)">
+          <input type="radio" name="C3" value="2">
+          <span><span class="answer-label">Partially defined but not broadly communicated</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('C3', 3, this)">
+          <input type="radio" name="C3" value="3">
+          <span><span class="answer-label">Clearly documented and communicated to all staff</span></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="validation-msg" id="validation-2">Please answer all questions before continuing.</div>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="prevStep(2)">&larr; Back</button>
+      <button class="btn btn-primary" onclick="nextStep(2)">Next: Board Readiness &rarr;</button>
+    </div>
+  </div>
+
+  <!-- Step 3: Board Readiness -->
+  <div class="step-panel" id="step-3">
+    <h2>Domain 4: Board Readiness</h2>
+    <div class="domain-intro">
+      Is the board equipped to govern AI adoption and risk? Board engagement is essential for organizational accountability and strategic alignment.
+    </div>
+
+    <div class="question-card" data-question="D1">
+      <div class="question-text">Has the board received a briefing or education session on AI risks and opportunities relevant to the organization?</div>
+      <div class="answer-options">
+        <label class="answer-option" onclick="selectAnswer('D1', 0, this)">
+          <input type="radio" name="D1" value="0">
+          <span><span class="answer-label">The board has never been briefed on AI</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('D1', 1, this)">
+          <input type="radio" name="D1" value="1">
+          <span><span class="answer-label">AI has come up informally once</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('D1', 2, this)">
+          <input type="radio" name="D1" value="2">
+          <span><span class="answer-label">One structured briefing has been delivered</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('D1', 3, this)">
+          <input type="radio" name="D1" value="3">
+          <span><span class="answer-label">The board receives regular briefings on AI matters</span></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question-card" data-question="D2">
+      <div class="question-text">Does the board have visibility into how AI is being used operationally?</div>
+      <div class="answer-options">
+        <label class="answer-option" onclick="selectAnswer('D2', 0, this)">
+          <input type="radio" name="D2" value="0">
+          <span><span class="answer-label">No visibility at all</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('D2', 1, this)">
+          <input type="radio" name="D2" value="1">
+          <span><span class="answer-label">AI use is occasionally mentioned in meetings</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('D2', 2, this)">
+          <input type="radio" name="D2" value="2">
+          <span><span class="answer-label">AI use is included in operational reports</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('D2', 3, this)">
+          <input type="radio" name="D2" value="3">
+          <span><span class="answer-label">AI governance is a standing agenda item</span></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question-card" data-question="D3">
+      <div class="question-text">Has the board discussed its own role in governing AI adoption and risk?</div>
+      <div class="answer-options">
+        <label class="answer-option" onclick="selectAnswer('D3', 0, this)">
+          <input type="radio" name="D3" value="0">
+          <span><span class="answer-label">This has not been discussed</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('D3', 1, this)">
+          <input type="radio" name="D3" value="1">
+          <span><span class="answer-label">Briefly raised but not formally addressed</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('D3', 2, this)">
+          <input type="radio" name="D3" value="2">
+          <span><span class="answer-label">Discussed once in a structured way</span></span>
+        </label>
+        <label class="answer-option" onclick="selectAnswer('D3', 3, this)">
+          <input type="radio" name="D3" value="3">
+          <span><span class="answer-label">The board's governance role is defined and documented</span></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="validation-msg" id="validation-3">Please answer all questions before continuing.</div>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="prevStep(3)">&larr; Back</button>
+      <button class="btn btn-primary" onclick="nextStep(3)">Next: Review &rarr;</button>
+    </div>
+  </div>
+
+  <!-- Step 4: Review -->
+  <div class="step-panel" id="step-4">
+    <h2>Review your answers</h2>
+    <p>Please confirm your answers below before generating your report. You can go back to any domain to make changes.</p>
+
+    <div id="reviewContent"></div>
+
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="prevStep(4)">&larr; Back</button>
+      <button class="btn btn-primary" onclick="generateReport()">Generate my report &rarr;</button>
+    </div>
+  </div>
+
+  <!-- Step 5: Results -->
+  <div class="step-panel" id="step-5">
+    <h2>Your AI Governance Gap Report</h2>
+
+    <div id="scoreSection"></div>
+
+    <div id="reportLoading" class="loading">
+      <div class="spinner"></div>
+      <div class="loading-text">Generating your personalized gap report...</div>
+    </div>
+
+    <div id="reportError" style="display:none;"></div>
+
+    <div id="reportOutput" style="display:none;">
+      <div class="report-container" id="reportContent"></div>
+    </div>
+
+    <div class="result-actions" id="resultActions" style="display:none;">
+      <button class="btn btn-primary" onclick="downloadPDF()">Download PDF report</button>
+      <button class="btn btn-secondary" onclick="startOver()">Start over</button>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>&copy; Bridges Strategy &middot; AI strategy for mission-driven organizations</p>
+</footer>
+
+<script>
+  // ── Configuration ──
+  const WORKER_URL = 'https://governance-diagnostic-proxy.mbridges30.workers.dev/proxy';
+
+  // ── State ──
+  const answers = {};
+  let currentStep = 0;
+
+  // ── Domain definitions ──
+  const domains = [
+    { key: 'visibility', label: 'Visibility', questions: ['A1','A2','A3','A4'], max: 12 },
+    { key: 'policy', label: 'Policy', questions: ['B1','B2','B3','B4'], max: 12 },
+    { key: 'accountability', label: 'Accountability', questions: ['C1','C2','C3'], max: 9 },
+    { key: 'board', label: 'Board Readiness', questions: ['D1','D2','D3'], max: 9 }
+  ];
+
+  const questionLabels = {
+    A1: 'Clear picture of AI tool usage by staff',
+    A2: 'Staff expected to disclose AI use',
+    A3: 'Visibility into AI vendors with data access',
+    A4: 'Leadership discussions on AI usage',
+    B1: 'Written AI usage policy',
+    B2: 'Data boundary guidelines for AI tools',
+    B3: 'External-facing AI use coverage',
+    B4: 'Policy review and update process',
+    C1: 'Designated AI oversight role',
+    C2: 'Process for raising AI concerns',
+    C3: 'Defined consequences for AI misuse',
+    D1: 'Board briefing on AI risks and opportunities',
+    D2: 'Board visibility into operational AI use',
+    D3: 'Board discussion of its AI governance role'
+  };
+
+  const answerLabels = {
+    A1: ['No awareness', 'Anecdotal only', 'Informal inventory exists', 'Formal, maintained inventory'],
+    A2: ['No expectation', 'Informally encouraged', 'Written but unenforced', 'Written and enforced'],
+    A3: ['No visibility', 'Vague awareness', 'Partial list', 'Complete, reviewed list'],
+    A4: ['Not discussed', 'Mentioned in passing', 'One structured discussion', 'Regular discussions'],
+    B1: ['No policy', 'Informal guidelines', 'Draft exists', 'Approved and distributed'],
+    B2: ['Not addressed', 'Mentioned informally', 'Partially addressed', 'Clearly defined'],
+    B3: ['Not covered', 'Briefly mentioned', 'Partially covered', 'Clearly scoped and enforced'],
+    B4: ['No process', 'Ad hoc updates', 'Informal review cycle', 'Scheduled with ownership'],
+    C1: ['No one assigned', 'Informally assumed', 'Named but not resourced', 'Named, resourced, empowered'],
+    C2: ['No process', 'Informal, word-of-mouth', 'Exists but not well known', 'Clear, accessible, used'],
+    C3: ['None defined', 'Handled ad hoc', 'Partially defined', 'Documented and communicated'],
+    D1: ['Never briefed', 'Informally once', 'One structured briefing', 'Regular briefings'],
+    D2: ['No visibility', 'Occasionally mentioned', 'Included in reports', 'Standing agenda item'],
+    D3: ['Not discussed', 'Briefly raised', 'Discussed once', 'Defined and documented']
+  };
+
+  // ── Answer selection ──
+  function selectAnswer(questionId, score, el) {
+    answers[questionId] = score;
+    const card = el.closest('.question-card');
+    card.querySelectorAll('.answer-option').forEach(opt => opt.classList.remove('selected'));
+    el.classList.add('selected');
+    el.querySelector('input[type="radio"]').checked = true;
+
+    // Conditional logic: if B1 is "No policy" (0), skip B2/B3/B4
+    if (questionId === 'B1') {
+      const conditionalCards = document.querySelectorAll('[data-conditional="B1"]');
+      const skipNotice = document.getElementById('policySkipNotice');
+      if (score === 0) {
+        conditionalCards.forEach(c => {
+          c.classList.add('hidden-conditional');
+          const qId = c.dataset.question;
+          answers[qId] = 0;
+          c.querySelectorAll('.answer-option').forEach(opt => opt.classList.remove('selected'));
+          c.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        });
+        skipNotice.classList.add('show');
+      } else {
+        conditionalCards.forEach(c => {
+          c.classList.remove('hidden-conditional');
+          const qId = c.dataset.question;
+          if (answers[qId] === 0 && !c.querySelector('input[type="radio"]:checked')) {
+            delete answers[qId];
+          }
+        });
+        skipNotice.classList.remove('show');
+      }
+    }
+  }
+
+  // ── Navigation ──
+  function validateStep(step) {
+    const domain = domains[step];
+    if (!domain) return true;
+    return domain.questions.every(q => {
+      const card = document.querySelector('[data-question="' + q + '"]');
+      if (card && card.classList.contains('hidden-conditional')) return true;
+      return answers[q] !== undefined;
+    });
+  }
+
+  function showStep(step) {
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('step-' + step).classList.add('active');
+
+    document.querySelectorAll('.progress-step').forEach((el, i) => {
+      el.classList.remove('active', 'completed');
+      if (i === step) el.classList.add('active');
+      else if (i < step) el.classList.add('completed');
+    });
+
+    currentStep = step;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function nextStep(from) {
+    if (from < 4 && !validateStep(from)) {
+      document.getElementById('validation-' + from).classList.add('show');
+      return;
+    }
+    document.getElementById('validation-' + from)?.classList.remove('show');
+
+    if (from === 3) buildReview();
+    showStep(from + 1);
+  }
+
+  function prevStep(from) {
+    showStep(from - 1);
+  }
+
+  function goToStep(step) {
+    showStep(step);
+  }
+
+  // ── Review ──
+  function buildReview() {
+    const container = document.getElementById('reviewContent');
+    let html = '';
+    domains.forEach((domain, i) => {
+      html += '<div class="review-domain">';
+      html += '<h3>' + domain.label + ' <button class="edit-btn" onclick="goToStep(' + i + ')">Edit</button></h3>';
+      domain.questions.forEach(q => {
+        const card = document.querySelector('[data-question="' + q + '"]');
+        const isSkipped = card && card.classList.contains('hidden-conditional');
+        const score = answers[q];
+        if (isSkipped) {
+          html += '<div class="review-item" style="color:#999"><strong>' + questionLabels[q] + ':</strong> Skipped — no policy exists</div>';
+        } else {
+          const label = answerLabels[q][score];
+          html += '<div class="review-item"><strong>' + questionLabels[q] + ':</strong> ' + label + '</div>';
+        }
+      });
+      html += '</div>';
+    });
+    container.innerHTML = html;
+  }
+
+  // ── Scoring ──
+  function getMaturityLevel(score, max) {
+    const pct = score / max;
+    if (pct <= 0.25) return { level: 'Nascent', color: 'var(--nascent)', desc: 'Governance is largely absent' };
+    if (pct <= 0.5) return { level: 'Emerging', color: 'var(--emerging)', desc: 'Some awareness, but significant gaps' };
+    if (pct <= 0.75) return { level: 'Developing', color: 'var(--developing)', desc: 'Foundations exist, consistency needed' };
+    return { level: 'Established', color: 'var(--established)', desc: 'Strong governance posture' };
+  }
+
+  function calculateScores() {
+    const scores = {};
+    let totalScore = 0;
+    const totalMax = 42;
+
+    domains.forEach(d => {
+      const score = d.questions.reduce((sum, q) => sum + (answers[q] || 0), 0);
+      const maturity = getMaturityLevel(score, d.max);
+      scores[d.key] = { score, max: d.max, pct: Math.round((score / d.max) * 100), ...maturity };
+      totalScore += score;
+    });
+
+    const overall = getMaturityLevel(totalScore, totalMax);
+    scores.overall = { score: totalScore, max: totalMax, pct: Math.round((totalScore / totalMax) * 100), ...overall };
+    return scores;
+  }
+
+  function renderScores(scores) {
+    const section = document.getElementById('scoreSection');
+    let html = '<div class="overall-score">';
+    html += '<div class="score-value">' + scores.overall.score + '</div>';
+    html += '<div class="score-out-of">out of ' + scores.overall.max + '</div>';
+    html += '<div class="maturity-label" style="background:' + scores.overall.color + '">' + scores.overall.level + '</div>';
+    html += '</div>';
+
+    html += '<div class="score-cards">';
+    domains.forEach(d => {
+      const s = scores[d.key];
+      html += '<div class="score-card">';
+      html += '<h3>' + d.label + '</h3>';
+      html += '<div class="score-bar-bg"><div class="score-bar-fill" style="width:' + s.pct + '%;background:' + s.color + '"></div></div>';
+      html += '<div class="score-label" style="color:' + s.color + '">' + s.score + '/' + s.max + ' — ' + s.level + '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+
+    section.innerHTML = html;
+  }
+
+  // ── Report generation ──
+  async function generateReport() {
+    showStep(5);
+    const scores = calculateScores();
+    renderScores(scores);
+
+    document.getElementById('reportLoading').style.display = 'block';
+    document.getElementById('reportError').style.display = 'none';
+    document.getElementById('reportOutput').style.display = 'none';
+    document.getElementById('resultActions').style.display = 'none';
+
+    const systemPrompt = `You are an AI governance advisor for nonprofit organizations. You have just received the results of an AI Governance Gap Diagnostic completed by a nonprofit leader.
+
+Your task is to generate a personalized, actionable gap report. Be direct, practical, and respectful of the organization's resource constraints. Avoid jargon. Write as if you are a trusted advisor speaking to an executive director or COO.
+
+Structure your report as follows:
+
+1. **Overall Assessment** (2-3 sentences summarizing governance maturity)
+2. **Domain-by-Domain Analysis** — for each of the 4 domains (Visibility, Policy, Accountability, Board Readiness):
+   - Current state summary (1-2 sentences based on their score and answers)
+   - Key gap identified (1 sentence)
+   - Recommended next step (1 concrete, low-cost action they can take in the next 30 days)
+3. **Priority Recommendation** — identify the single most important area to address first and explain why
+4. **90-Day Roadmap** — 3 concrete milestones the organization could aim for in the next quarter
+
+Keep the total report under 600 words. Use plain language. Do not use bullet points excessively — prefer short paragraphs. Do not include disclaimers about being an AI.`;
+
+    let userMessage = 'Here are the AI Governance Gap Diagnostic results for this nonprofit organization:\n\n';
+    userMessage += 'OVERALL: ' + scores.overall.score + '/' + scores.overall.max + ' (' + scores.overall.level + ')\n\n';
+
+    domains.forEach(d => {
+      const s = scores[d.key];
+      userMessage += d.label.toUpperCase() + ': ' + s.score + '/' + s.max + ' (' + s.level + ')\n';
+      d.questions.forEach(q => {
+        userMessage += '  - ' + questionLabels[q] + ': ' + answerLabels[q][answers[q]] + ' (score: ' + answers[q] + '/3)\n';
+      });
+      userMessage += '\n';
+    });
+
+    userMessage += 'Please generate a personalized gap report based on these results.';
+
+    try {
+      const response = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1024,
+          system: systemPrompt,
+          messages: [{ role: 'user', content: userMessage }]
+        })
+      });
+
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(errData.error?.message || 'API request failed (status ' + response.status + ')');
+      }
+
+      const data = await response.json();
+      const reportText = data.content[0].text;
+
+      document.getElementById('reportContent').innerHTML = formatReport(reportText);
+      document.getElementById('reportLoading').style.display = 'none';
+      document.getElementById('reportOutput').style.display = 'block';
+      document.getElementById('resultActions').style.display = 'flex';
+    } catch (err) {
+      document.getElementById('reportLoading').style.display = 'none';
+      document.getElementById('reportError').style.display = 'block';
+      document.getElementById('reportError').innerHTML = '<div class="error-box">' +
+        '<strong>Unable to generate report.</strong><br>' +
+        '<p>' + escapeHtml(err.message) + '</p>' +
+        '<button class="btn btn-primary" onclick="generateReport()" style="margin-top:0.75rem">Try again</button>' +
+        '</div>';
+    }
+  }
+
+  function formatReport(text) {
+    let html = text
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/^## (.+)$/gm, '<h3>$1</h3>')
+      .replace(/^# (.+)$/gm, '<h3>$1</h3>')
+      .replace(/^\d+\.\s\*\*(.+?)\*\*/gm, '<h3>$1</h3>')
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/\n/g, '<br>');
+    return '<p>' + html + '</p>';
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  // ── PDF download ──
+  function downloadPDF() {
+    const btn = event.target;
+    btn.disabled = true;
+    btn.textContent = 'Preparing PDF...';
+
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+    script.onload = function() {
+      const element = document.getElementById('step-5');
+      const actionsEl = document.getElementById('resultActions');
+      actionsEl.style.display = 'none';
+
+      html2pdf().set({
+        margin: [1, 1, 1, 1],
+        filename: 'AI-Governance-Gap-Report.pdf',
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'cm', format: 'a4', orientation: 'portrait' }
+      }).from(element).save().then(function() {
+        actionsEl.style.display = 'flex';
+        btn.disabled = false;
+        btn.textContent = 'Download PDF report';
+      });
+    };
+    script.onerror = function() {
+      btn.disabled = false;
+      btn.textContent = 'Download PDF report';
+      alert('Unable to load PDF library. Please try again.');
+    };
+    document.head.appendChild(script);
+  }
+
+  // ── Start over ──
+  function startOver() {
+    Object.keys(answers).forEach(k => delete answers[k]);
+    document.querySelectorAll('.answer-option').forEach(el => el.classList.remove('selected'));
+    document.querySelectorAll('input[type="radio"]').forEach(el => el.checked = false);
+    document.querySelectorAll('.validation-msg').forEach(el => el.classList.remove('show'));
+    document.querySelectorAll('.hidden-conditional').forEach(el => el.classList.remove('hidden-conditional'));
+    document.getElementById('policySkipNotice').classList.remove('show');
+    showStep(0);
+  }
+</script>
+
+</body>
+</html>

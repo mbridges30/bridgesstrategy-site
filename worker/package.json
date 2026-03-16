@@ -1,0 +1,7 @@
+{
+  "name": "governance-diagnostic-proxy",
+  "private": true,
+  "devDependencies": {
+    "wrangler": "^3"
+  }
+}
