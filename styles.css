@@ -449,6 +449,20 @@ a:hover {
   line-height: 1.7;
 }
 
+.post-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 1.5rem 0;
+}
+
+.post-body .image-caption {
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
+
 .post-source {
   font-size: 0.8rem;
   color: #999;
