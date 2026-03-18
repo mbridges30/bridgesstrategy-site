@@ -394,12 +394,14 @@ a:hover {
 
 /* Writing archive */
 .writing-entry {
-  display: block;
+  display: flex;
+  gap: 1rem;
   padding: 1.25rem 0;
   border-bottom: 1px solid #eee;
   text-decoration: none;
   color: #111;
   transition: background 0.15s;
+  align-items: flex-start;
 }
 
 .writing-entry:first-of-type {
@@ -410,6 +412,20 @@ a:hover {
   text-decoration: none;
   color: #111;
   background: #fafafa;
+}
+
+.writing-thumb {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.writing-entry-text {
+  flex: 1;
+  min-width: 0;
 }
 
 .writing-entry time {
