@@ -348,23 +348,46 @@ a:hover {
   margin-top: 0.5rem;
 }
 
-/* Kit.com form overrides */
-[data-uid="7dcdb9d4be"] {
-  font-family: inherit !important;
+/* Subscribe form */
+.subscribe-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
-[data-uid="7dcdb9d4be"] input[type="email"] {
-  border: 1px solid #ccc !important;
-  border-radius: 4px !important;
-  box-shadow: none !important;
-  font-family: inherit !important;
+
+.subscribe-form input[type="email"] {
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-family: inherit;
 }
-[data-uid="7dcdb9d4be"] button {
-  background-color: var(--accent) !important;
-  color: white !important;
-  border-radius: 4px !important;
-  box-shadow: none !important;
-  font-family: inherit !important;
+
+.subscribe-form input[type="email"]:focus {
+  outline: none;
+  border-color: var(--accent);
 }
-[data-uid="7dcdb9d4be"] button:hover {
-  background-color: var(--accent-hover) !important;
+
+.subscribe-form button {
+  padding: 0.6rem 1.2rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.subscribe-form button:hover {
+  background: var(--accent-hover);
+}
+
+.subscribe-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

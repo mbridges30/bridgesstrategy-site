@@ -162,7 +162,11 @@
     <section id="subscribe">
       <h2>Stay current on AI in the nonprofit sector</h2>
       <p>A weekly digest of curated news and use cases for nonprofit leaders. Sent every Tuesday.</p>
-      <script async data-uid="7dcdb9d4be" src="https://bridges-strategy.kit.com/7dcdb9d4be/index.js"></script>
+      <form id="subscribe-form" class="subscribe-form">
+        <input type="email" id="subscribe-email" placeholder="your@email.com" required />
+        <button type="submit">Subscribe</button>
+      </form>
+      <p id="subscribe-msg" class="subscribe-note" style="display:none;"></p>
       <p class="subscribe-note">No spam. Unsubscribe anytime. We do not share subscriber data.</p>
     </section>
 
@@ -194,4 +198,42 @@
       <!-- end Google Calendar Appointment Scheduling -->
 
       <p class="social-link">
-        <a href="https://www.linkedin
+        <a href="https://www.linkedin.com/in/mbridges30" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </p>
+    </section>
+
+  </main>
+
+  <script>
+  document.querySelectorAll('.subscribe-form').forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var input = form.querySelector('input[type="email"]');
+      var btn = form.querySelector('button');
+      var msg = form.nextElementSibling;
+      btn.disabled = true;
+      btn.textContent = '...';
+      fetch('https://radar.bridgesstrategy.com/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: input.value.trim() })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (msg) { msg.textContent = data.message || data.error; msg.style.display = 'block'; }
+        if (data.message) { input.value = ''; msg.style.color = '#4f8f9b'; }
+        else { msg.style.color = '#e53e3e'; }
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+      })
+      .catch(function() {
+        if (msg) { msg.textContent = 'Something went wrong.'; msg.style.display = 'block'; msg.style.color = '#e53e3e'; }
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+      });
+    });
+  });
+  </script>
+
+</body>
+</html>
