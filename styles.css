@@ -47,6 +47,11 @@ body {
   color: var(--accent);
 }
 
+.site-nav a.active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 /* Layout */
 header, main, footer {
   max-width: 720px;
@@ -54,10 +59,40 @@ header, main, footer {
   padding: 2.5rem 1.5rem;
 }
 
-/* Header */
+/* Hero header */
 header {
   padding-top: 3rem;
   padding-bottom: 3rem;
+}
+
+header.hero {
+  background: linear-gradient(to bottom, var(--accent-light), #f9fafa);
+  max-width: 100%;
+  padding: 3rem 1.5rem 3.5rem;
+}
+
+header.hero > * {
+  max-width: 690px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header.hero .logo {
+  display: block;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Hero callout — the proof point box */
+.hero-callout {
+  margin: 1.25rem 0 1.75rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.75);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 4px 4px 0;
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.5;
 }
 
 h1 {
@@ -71,11 +106,15 @@ h1 {
   color: #555;
 }
 
-/* CTA button */
+/* CTA bar */
 .cta-bar {
   margin-top: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
+/* Primary button */
 .cta-button {
   display: inline-block;
   padding: 0.7rem 1.4rem;
@@ -95,6 +134,20 @@ h1 {
   box-shadow: 0 2px 8px rgba(79, 143, 155, 0.3);
 }
 
+/* Secondary / ghost button */
+.cta-button--secondary {
+  background: transparent;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  box-shadow: none;
+}
+
+.cta-button--secondary:hover {
+  background: var(--accent-light);
+  color: var(--accent-hover);
+  box-shadow: none;
+}
+
 /* Sections */
 section {
   margin-bottom: 4rem;
@@ -106,7 +159,7 @@ section + section {
 }
 
 h2 {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1rem;
   color: var(--accent);
@@ -114,7 +167,7 @@ h2 {
 
 /* Subsection headers */
 h3 {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 600;
   margin-top: 1.75rem;
   margin-bottom: 0.25rem;
@@ -123,7 +176,8 @@ h3 {
 
 .lead {
   font-size: 1.05rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
+  line-height: 1.7;
 }
 
 p {
@@ -239,8 +293,13 @@ blockquote cite {
 
 .carousel-hint {
   font-size: 0.85rem;
-  color: #999;
-  margin-top: 0.5rem;
+  color: #666;
+  margin-top: 0.75rem;
+}
+
+.carousel-hint a {
+  color: var(--accent);
+  font-weight: 500;
 }
 
 /* Tool cards grid */
@@ -266,11 +325,12 @@ blockquote cite {
   border-radius: 6px;
   text-decoration: none;
   color: #111;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .tool-card:hover {
   border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(79, 143, 155, 0.1);
   text-decoration: none;
   color: #111;
 }
@@ -327,7 +387,7 @@ footer {
   margin-top: 4rem;
   padding-top: 2rem;
   font-size: 0.9rem;
-  color: #888;
+  color: #666;
   text-align: center;
 }
 
@@ -344,7 +404,7 @@ a:hover {
 /* Subscribe note */
 .subscribe-note {
   font-size: 0.75rem;
-  color: #999;
+  color: #666;
   margin-top: 0.5rem;
 }
 
@@ -432,7 +492,7 @@ a:hover {
 
 .writing-entry time {
   font-size: 0.8rem;
-  color: #999;
+  color: #666;
 }
 
 .writing-entry h3 {
@@ -458,8 +518,10 @@ a:hover {
 /* Post page */
 .post-meta {
   font-size: 0.85rem;
-  color: #999;
+  color: #666;
   margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
 }
 
 .post-body {
@@ -476,14 +538,14 @@ a:hover {
 
 .post-body .image-caption {
   font-size: 0.8rem;
-  color: #999;
+  color: #666;
   margin-top: -1rem;
   margin-bottom: 1.5rem;
 }
 
 .post-source {
   font-size: 0.8rem;
-  color: #999;
+  color: #666;
   margin-top: 2rem;
   padding-top: 1rem;
   border-top: 1px solid #eee;
@@ -491,4 +553,26 @@ a:hover {
 
 .post-back {
   margin-top: 2rem;
+}
+
+/* Subscribe mini — compact version for post footers */
+.subscribe-mini {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background: var(--accent-light);
+  border-radius: 6px;
+}
+
+.subscribe-mini h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+  color: #111;
+}
+
+.subscribe-mini p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.75rem;
 }

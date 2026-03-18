@@ -5,6 +5,14 @@
   <title>AI Governance Gap Diagnostic | Bridges Strategy</title>
   <meta name="description" content="A free interactive assessment that evaluates your nonprofit's AI governance maturity across visibility, policy, accountability, and board readiness.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://bridgesstrategy.com/governance-diagnostic.html">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bridgesstrategy.com/governance-diagnostic.html">
+  <meta property="og:title" content="AI Governance Gap Diagnostic | Bridges Strategy">
+  <meta property="og:description" content="A free interactive assessment that evaluates your nonprofit's AI governance maturity across visibility, policy, accountability, and board readiness.">
+  <meta property="og:image" content="https://bridgesstrategy.com/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
   <style>
     /* Reset */
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -73,6 +81,24 @@
     p { margin-bottom: 1rem; }
 
     a { color: var(--accent); }
+
+    /* Site nav */
+    .site-nav {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      gap: 1.5rem;
+      border-bottom: 1px solid #e0e0e0;
+      background: #fff;
+    }
+    .site-nav a {
+      font-size: 0.95rem;
+      color: #555;
+      text-decoration: none;
+    }
+    .site-nav a:hover { color: var(--accent); }
+    .site-nav a.active { color: var(--accent); font-weight: 600; }
 
     /* Progress bar */
     .progress-bar {
@@ -470,6 +496,15 @@
   </style>
 </head>
 <body>
+
+  <nav class="site-nav">
+    <a href="index.html#how-i-help">How I help</a>
+    <a href="tools.html" class="active">Tools</a>
+    <a href="/writing/">Writing</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+
 
 <header>
   <a href="index.html"><img src="assets/logo.png" alt="Bridges Strategy logo" class="logo"></a>

@@ -6,14 +6,37 @@
   <meta name="description" content="Why the anxiety about keeping up with AI is almost always worse than the actual gap.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://bridgesstrategy.com/writing/should-i-be-using-claude.html">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../styles.css">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://bridgesstrategy.com/writing/should-i-be-using-claude.html">
+  <meta property="og:title" content="Should I Be Using Claude Now? | Bridges Strategy">
+  <meta property="og:description" content="Why the anxiety about keeping up with AI is almost always worse than the actual gap.">
+  <meta property="og:image" content="https://bridgesstrategy.com/writing/images/should-i-be-using-claude.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Should I Be Using Claude Now?",
+    "description": "Why the anxiety about keeping up with AI is almost always worse than the actual gap.",
+    "datePublished": "2026-03-09",
+    "author": { "@type": "Person", "name": "Mark Bridges" },
+    "publisher": { "@type": "Organization", "name": "Bridges Strategy", "url": "https://bridgesstrategy.com" },
+    "image": "https://bridgesstrategy.com/writing/images/should-i-be-using-claude.jpg",
+    "url": "https://bridgesstrategy.com/writing/should-i-be-using-claude.html"
+  }
+  </script>
 </head>
 <body>
 
   <nav class="site-nav">
     <a href="../index.html#how-i-help">How I help</a>
     <a href="../tools.html">Tools</a>
-    <a href="../writing/">Writing</a>
+    <a href="../writing/" class="active">Writing</a>
     <a href="../index.html#about">About</a>
     <a href="../index.html#contact">Contact</a>
   </nav>
@@ -49,7 +72,52 @@
     <p class="post-source">Originally published on <a href="https://www.linkedin.com/posts/mbridges30_ai-nonprofitleadership-responsibleai-activity-7436815170917765120-MA03" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
 
     <p class="post-back"><a href="/writing/">&larr; Back to writing</a></p>
+
+    <div class="subscribe-mini">
+      <h3>Stay current on AI in the nonprofit sector</h3>
+      <p>A weekly digest for nonprofit leaders. Sent every Tuesday. No spam.</p>
+      <form class="subscribe-form">
+        <input type="email" placeholder="your@email.com" required autocomplete="email" />
+        <button type="submit">Subscribe</button>
+      </form>
+      <p class="subscribe-note" style="display:none;"></p>
+    </div>
   </main>
+
+  <footer>
+    <p>&copy; 2026 Bridges Strategy &middot; <a href="https://www.linkedin.com/in/mbridges30" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+  </footer>
+
+  <script>
+  document.querySelectorAll('.subscribe-form').forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var input = form.querySelector('input[type="email"]');
+      var btn = form.querySelector('button');
+      var msg = form.nextElementSibling;
+      btn.disabled = true;
+      btn.textContent = '...';
+      fetch('https://radar.bridgesstrategy.com/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: input.value.trim() })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (msg) { msg.textContent = data.message || data.error; msg.style.display = 'block'; }
+        if (data.message) { input.value = ''; msg.style.color = '#4f8f9b'; }
+        else { msg.style.color = '#e53e3e'; }
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+      })
+      .catch(function() {
+        if (msg) { msg.textContent = 'Something went wrong.'; msg.style.display = 'block'; msg.style.color = '#e53e3e'; }
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+      });
+    });
+  });
+  </script>
 
 </body>
 </html>
