@@ -324,9 +324,25 @@ blockquote cite {
   margin-top: 1.5rem;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .tools-grid {
     grid-template-columns: 1fr;
+  }
+
+  .site-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .site-nav .nav-links {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .site-nav .nav-links a {
+    font-size: 0.85rem;
   }
 }
 
