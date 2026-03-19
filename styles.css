@@ -45,11 +45,10 @@ body {
 }
 
 .site-nav .nav-brand img {
-  height: 32px;
+  height: 36px;
   width: auto;
   display: block;
   flex-shrink: 0;
-  max-height: 32px;
 }
 
 .site-nav .nav-links {
