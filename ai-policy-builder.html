@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nonprofit AI Policy Builder | Bridges Strategy</title>
+  <meta name="description" content="A free tool that guides nonprofits through a short discovery process and generates a complete, board-ready AI Acceptable Use and Governance Policy.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://bridgesstrategy.com/ai-policy-builder.html">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bridgesstrategy.com/ai-policy-builder.html">
+  <meta property="og:title" content="Nonprofit AI Policy Builder | Bridges Strategy">
+  <meta property="og:description" content="Answer five short questions and receive a complete, board-ready AI governance policy tailored to your nonprofit.">
+  <meta property="og:image" content="https://bridgesstrategy.com/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #4f8f9b;
+      --accent-light: #e8f1f3;
+      --accent-hover: #3d7a85;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      color: #111;
+      background: #f9fafa;
+      border-top: 3px solid var(--accent);
+    }
+
+    /* Nav */
+    .site-nav {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e0e0e0;
+      background: #fff;
+    }
+    .site-nav .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .site-nav .nav-brand img { height: 36px; width: auto; }
+    .site-nav .nav-links { display: flex; gap: 1.5rem; }
+    .site-nav a { font-size: 0.95rem; color: #555; text-decoration: none; }
+    .site-nav a:hover { color: var(--accent); }
+    .site-nav a.active { color: var(--accent); font-weight: 600; }
+
+    @media (max-width: 640px) {
+      .site-nav { flex-direction: column; align-items: flex-start; gap: 0.6rem; padding: 0.75rem 1.25rem; }
+      .site-nav .nav-links { gap: 1rem; flex-wrap: wrap; }
+      .site-nav .nav-links a { font-size: 0.85rem; }
+    }
+
+    header, main, footer {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    header { padding-top: 2.5rem; padding-bottom: 1rem; }
+
+    h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.25rem; font-weight: 600; color: var(--accent); margin-bottom: 0.75rem; }
+    h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+    p { margin-bottom: 1rem; }
+    a { color: var(--accent); }
+
+    .lead { font-size: 1.05rem; color: #444; margin-top: 0.5rem; }
+
+    /* Progress bar */
+    .progress-wrap {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 2rem;
+    }
+    .progress-step {
+      flex: 1;
+      height: 4px;
+      background: #ddd;
+      border-radius: 2px;
+      transition: background 0.3s;
+    }
+    .progress-step.done { background: var(--accent); }
+    .progress-step.active { background: var(--accent-hover); }
+
+    .step-label {
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    /* Disclaimer box */
+    .notice-box {
+      background: #fff8e1;
+      border-left: 4px solid #f0c040;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      color: #555;
+    }
+    .notice-box strong { color: #111; }
+
+    /* Question card */
+    .question-card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .question-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      color: #111;
+      line-height: 1.5;
+    }
+    .question-sub {
+      font-size: 0.9rem;
+      color: #777;
+      font-weight: 400;
+      margin-top: 0.25rem;
+      display: block;
+    }
+
+    /* Option list */
+    .option-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .option-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      padding: 0.9rem 1.1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
+      text-align: left;
+      font-size: 0.97rem;
+      font-family: inherit;
+      color: #111;
+      transition: border-color 0.15s, background 0.15s;
+      line-height: 1.5;
+    }
+    .option-btn:hover { border-color: var(--accent); background: var(--accent-light); }
+    .option-btn.selected { border-color: var(--accent); background: var(--accent-light); }
+    .option-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #eee;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #555;
+      flex-shrink: 0;
+      margin-top: 1px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .option-btn.selected .option-num { background: var(--accent); color: #fff; }
+    .option-btn:hover .option-num { background: var(--accent); color: #fff; }
+
+    /* Confirmation bullets */
+    .confirm-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+    .confirm-list li {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 0.97rem;
+      padding: 0.6rem 0.75rem;
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+    }
+    .confirm-list .label {
+      color: #777;
+      font-size: 0.85rem;
+      min-width: 120px;
+      flex-shrink: 0;
+    }
+    .confirm-list .value { color: #111; font-weight: 500; }
+    .assumption-note {
+      background: var(--accent-light);
+      border-radius: 6px;
+      padding: 0.9rem 1.1rem;
+      font-size: 0.9rem;
+      color: #444;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-secondary {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      color: var(--accent);
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      border: 2px solid var(--accent);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-secondary:hover { background: var(--accent-light); }
+    .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+
+    /* Policy output */
+    #policy-output {
+      display: none;
+    }
+    .policy-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .copy-btn:hover { background: var(--accent-hover); }
+    .copy-btn.copied { background: #27ae60; }
+    .copy-notice {
+      font-size: 0.88rem;
+      color: #666;
+      padding: 0.5rem 0;
+      align-self: center;
+    }
+    .policy-body {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 2rem;
+      font-size: 0.93rem;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      font-family: "Georgia", serif;
+      color: #222;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .guardrails-prompt {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #e0e0e0;
+      font-size: 0.875rem;
+      color: #888;
+      padding-top: 1.5rem;
+      padding-bottom: 2rem;
+    }
+    footer a { color: #888; }
+    footer a:hover { color: var(--accent); }
+
+    /* Steps visibility */
+    .wizard-step { display: none; }
+    .wizard-step.active { display: block; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/" class="nav-brand">
+    <img src="assets/logo-full.svg" alt="Bridges Strategy" />
+  </a>
+  <div class="nav-links">
+    <a href="index.html#how-i-help">How I help</a>
+    <a href="tools.html" class="active">Tools</a>
+    <a href="/writing/">Writing</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<header>
+  <a href="tools.html" style="font-size:0.9rem; color:var(--accent); text-decoration:none;">← Back to tools</a>
+  <h1 style="margin-top:0.75rem;">Nonprofit AI Policy Builder</h1>
+  <p class="lead">Answer five short questions and receive a complete, board-ready AI governance policy tailored to your organization's size, mission, and risk level.</p>
+</header>
+
+<main>
+
+  <!-- Step 0: Welcome / Disclaimer -->
+  <div class="wizard-step active" id="step-0">
+    <div class="notice-box">
+      <strong>Before you begin:</strong> I am not an attorney. This tool produces a governance draft — review by legal counsel is recommended where appropriate, especially if your organization operates under sector-specific data or safeguarding regulations.<br><br>
+      <strong>Important:</strong> This tool does not save your information or your policy draft. Once you navigate away from this page, the conversation cannot be recovered. When your draft is ready, copy the full text before closing or leaving the page.
+    </div>
+    <div class="question-card">
+      <div class="question-text">This tool will ask you five short questions about your organization, then generate a complete AI Acceptable Use and Governance Policy. The whole process takes about three minutes.</div>
+      <p style="font-size:0.95rem; color:#555; margin-bottom:0;">No personal or identifying information is required. You can answer at a categorical level throughout.</p>
+    </div>
+    <div class="btn-row">
+      <button class="btn-primary" onclick="goToStep(1)">Begin →</button>
+    </div>
+  </div>
+
+  <!-- Step 1: Mission type -->
+  <div class="wizard-step" id="step-1">
+    <div class="progress-wrap" id="progress-1"></div>
+    <div class="step-label">Question 1 of 5</div>
+    <div class="question-card">
+      <div class="question-text">
+        What best describes your organization's primary mission area?
+        <span class="question-sub">Choose the option that fits most closely. Exact fit is not required.</span>
+      </div>
+      <div class="option-list" id="opts-mission"></div>
+    </div>
+  </div>
+
+  <!-- Step 2: Current AI use -->
+  <div class="wizard-step" id="step-2">
+    <div class="progress-wrap" id="progress-2"></div>
+    <div class="step-label">Question 2 of 5</div>
+    <div class="question-card">
+      <div class="question-text">
+        How would you describe your organization's current relationship with AI?
+        <span class="question-sub">Think about what's actually happening, not what's planned.</span>
+      </div>
+      <div class="option-list" id="opts-aiuse"></div>
+    </div>
+  </div>
+
+  <!-- Step 3: Data sensitivity -->
+  <div class="wizard-step" id="step-3">
+    <div class="progress-wrap" id="progress-3"></div>
+    <div class="step-label">Question 3 of 5</div>
+    <div class="question-card">
+      <div class="question-text">
+        How sensitive is the data your organization typically handles?
+        <span class="question-sub">Think about your beneficiaries, clients, or the people you serve — not just donor or staff data.</span>
+      </div>
+      <div class="option-list" id="opts-sensitivity"></div>
+    </div>
+  </div>
+
+  <!-- Step 4: Org size -->
+  <div class="wizard-step" id="step-4">
+    <div class="progress-wrap" id="progress-4"></div>
+    <div class="step-label">Question 4 of 5</div>
+    <div class="question-card">
+      <div class="question-text">
+        What is your organization's approximate size?
+        <span class="question-sub">This helps calibrate how detailed and formal the policy should be.</span>
+      </div>
+      <div class="option-list" id="opts-size"></div>
+    </div>
+  </div>
+
+  <!-- Step 5: Policy ownership -->
+  <div class="wizard-step" id="step-5">
+    <div class="progress-wrap" id="progress-5"></div>
+    <div class="step-label">Question 5 of 5</div>
+    <div class="question-card">
+      <div class="question-text">
+        Who is most likely to own and maintain this policy?
+        <span class="question-sub">This determines how the governance and accountability sections are structured.</span>
+      </div>
+      <div class="option-list" id="opts-owner"></div>
+    </div>
+  </div>
+
+  <!-- Step 6: Confirmation -->
+  <div class="wizard-step" id="step-6">
+    <div class="progress-wrap" id="progress-6"></div>
+    <h2>Before we generate your policy</h2>
+    <p style="color:#555; margin-bottom:1.25rem;">Here's what we understood about your organization. Please confirm this is correct, or go back to make changes.</p>
+    <ul class="confirm-list" id="confirm-list"></ul>
+    <div class="assumption-note" id="assumption-note"></div>
+    <div class="btn-row">
+      <button class="btn-primary" onclick="generateAndShow()">Generate my policy →</button>
+      <button class="btn-secondary" onclick="goToStep(1)">← Edit answers</button>
+    </div>
+  </div>
+
+  <!-- Step 7: Policy output -->
+  <div class="wizard-step" id="step-7">
+    <h2>Your AI Governance Policy</h2>
+    <p style="color:#555; margin-bottom:1.25rem;">Your policy draft is ready. Select all, copy, and paste it into a new Word or Google Doc — the formatting will convert cleanly in most editors.</p>
+    <div class="policy-actions">
+      <button class="copy-btn" id="copy-btn" onclick="copyPolicy()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copy full policy
+      </button>
+      <span class="copy-notice" id="copy-notice"></span>
+    </div>
+    <div class="policy-body" id="policy-text"></div>
+
+    <div class="guardrails-prompt" id="guardrails-prompt">
+      <h3>Optional: Department-specific guardrails</h3>
+      <p style="font-size:0.95rem; color:#444; margin-bottom:1rem;">Would you like to add department-specific guardrails as an appendix to your policy? These cover fundraising, HR, communications, programs, and operations.</p>
+      <div class="btn-row" style="margin-top:0;">
+        <button class="btn-primary" onclick="addGuardrails()">Yes, add guardrails</button>
+        <button class="btn-secondary" onclick="document.getElementById('guardrails-prompt').style.display='none'">No thanks</button>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem; padding:1.25rem; background:var(--accent-light); border-radius:8px; font-size:0.95rem;">
+      <strong>Suggested next steps:</strong>
+      <ul style="margin-top:0.6rem; margin-left:1.25rem; color:#444; line-height:2;">
+        <li>Share this draft with your leadership team or board for review</li>
+        <li>Have legal counsel review sections covering data privacy or employment</li>
+        <li>Set a calendar reminder to review the policy in 6–12 months</li>
+      </ul>
+      <p style="margin-top:1rem; margin-bottom:0; color:#555;">This policy was built using the Bridges Strategy nonprofit AI governance framework. If you found this useful or want to go deeper, visit <a href="https://bridgesstrategy.com">bridgesstrategy.com</a> or reach out to <a href="mailto:mark@bridgesstrategy.com">mark@bridgesstrategy.com</a>.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>A free resource from <a href="https://bridgesstrategy.com">Bridges Strategy</a> | <a href="mailto:mark@bridgesstrategy.com">mark@bridgesstrategy.com</a></p>
+</footer>
+
+<script>
+// ─── State ────────────────────────────────────────────────────────────────────
+const state = {
+  mission: null,
+  aiUse: null,
+  sensitivity: null,
+  size: null,
+  owner: null
+};
+
+let policyText = '';
+
+// ─── Option definitions ───────────────────────────────────────────────────────
+const QUESTIONS = {
+  mission: {
+    key: 'mission',
+    step: 1,
+    nextStep: 2,
+    opts: [
+      { val: 'social_services', label: 'Social services or community support' },
+      { val: 'education', label: 'Education or youth development' },
+      { val: 'health', label: 'Health or mental health services' },
+      { val: 'advocacy', label: 'Advocacy or civic engagement' },
+      { val: 'environment', label: 'Environment or conservation' },
+      { val: 'arts', label: 'Arts, culture, or humanities' },
+      { val: 'housing', label: 'Housing or economic development' },
+      { val: 'other', label: 'Multiple focus areas or other mission type' }
+    ]
+  },
+  aiUse: {
+    key: 'aiUse',
+    step: 2,
+    nextStep: 3,
+    opts: [
+      { val: 'none', label: 'We have not started using AI yet' },
+      { val: 'informal', label: 'Some staff use AI informally on their own (e.g., ChatGPT for drafting)' },
+      { val: 'embedded', label: 'We use tools that have AI built in (e.g., Canva, Grammarly, CRM features)' },
+      { val: 'intentional', label: 'We have an intentional AI program or are actively piloting specific tools' }
+    ]
+  },
+  sensitivity: {
+    key: 'sensitivity',
+    step: 3,
+    nextStep: 4,
+    opts: [
+      { val: 'low', label: 'Primarily general public content — no sensitive populations or personal case data' },
+      { val: 'medium', label: 'Some personal data (donor records, staff files) but not sensitive beneficiary case data' },
+      { val: 'high', label: 'We serve sensitive populations (e.g., children, health patients, survivors, immigrants)' },
+      { val: 'very_high', label: 'We handle highly sensitive data AND serve one or more vulnerable populations' }
+    ]
+  },
+  size: {
+    key: 'size',
+    step: 4,
+    nextStep: 5,
+    opts: [
+      { val: 'solo', label: 'Solo or very small — 1 to 5 people' },
+      { val: 'small', label: 'Small team — 6 to 15 people' },
+      { val: 'mid', label: 'Mid-size — 16 to 50 people' },
+      { val: 'large', label: 'Larger organization — more than 50 people or multiple program areas' }
+    ]
+  },
+  owner: {
+    key: 'owner',
+    step: 5,
+    nextStep: 6,
+    opts: [
+      { val: 'solo', label: 'One designated person will own it (e.g., Executive Director or Operations Lead)' },
+      { val: 'team', label: 'A small leadership team will share responsibility' },
+      { val: 'committee', label: 'We want a formal committee or governance structure' }
+    ]
+  }
+};
+
+const QUESTION_ORDER = ['mission', 'aiUse', 'sensitivity', 'size', 'owner'];
+
+// ─── Build option lists on load ───────────────────────────────────────────────
+function buildOptions() {
+  Object.values(QUESTIONS).forEach(q => {
+    const container = document.getElementById('opts-' + q.key);
+    if (!container) return;
+    q.opts.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.dataset.val = opt.val;
+      btn.innerHTML = `<span class="option-num">${i + 1}</span><span>${opt.label}</span>`;
+      btn.addEventListener('click', () => selectOption(q.key, opt.val, btn, q.nextStep));
+      container.appendChild(btn);
+    });
+  });
+}
+
+function selectOption(key, val, btn, nextStep) {
+  // Deselect siblings
+  btn.closest('.option-list').querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  state[key] = val;
+  // Brief pause then advance
+  setTimeout(() => goToStep(nextStep), 280);
+}
+
+// ─── Progress bar ─────────────────────────────────────────────────────────────
+function renderProgress(stepNum) {
+  const totalSteps = 5;
+  const containerId = 'progress-' + stepNum;
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = '';
+  for (let i = 1; i <= totalSteps; i++) {
+    const div = document.createElement('div');
+    div.className = 'progress-step' + (i < stepNum ? ' done' : i === stepNum ? ' active' : '');
+    container.appendChild(div);
+  }
+}
+
+// ─── Navigation ───────────────────────────────────────────────────────────────
+function goToStep(n) {
+  document.querySelectorAll('.wizard-step').forEach(el => el.classList.remove('active'));
+  const target = document.getElementById('step-' + n);
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    renderProgress(n);
+    if (n === 6) buildConfirmation();
+  }
+}
+
+// ─── Confirmation ─────────────────────────────────────────────────────────────
+function getLabel(key, val) {
+  const q = QUESTIONS[key];
+  const opt = q.opts.find(o => o.val === val);
+  return opt ? opt.label : val;
+}
+
+function buildConfirmation() {
+  const list = document.getElementById('confirm-list');
+  list.innerHTML = '';
+
+  const labels = {
+    mission: 'Mission area',
+    aiUse: 'AI use today',
+    sensitivity: 'Data sensitivity',
+    size: 'Organization size',
+    owner: 'Policy ownership'
+  };
+
+  QUESTION_ORDER.forEach(key => {
+    if (!state[key]) return;
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="label">${labels[key]}</span><span class="value">${getLabel(key, state[key])}</span>`;
+    list.appendChild(li);
+  });
+
+  // Assumptions note
+  const assumptionEl = document.getElementById('assumption-note');
+  const assumptions = [];
+  if (state.sensitivity === 'high' || state.sensitivity === 'very_high') {
+    assumptions.push('Because you work with sensitive populations, your policy will apply the Red default rule — most service-delivery data is treated as high sensitivity unless stated otherwise.');
+  }
+  if (state.aiUse === 'none') {
+    assumptions.push('Since AI use hasn\'t started yet, the policy will be framed as forward-looking governance — establishing rules before use begins.');
+  }
+  if (state.size === 'solo' || state.size === 'small') {
+    assumptions.push('For a small organization, the policy will be kept concise and practical, without committee structures or multi-level approvals.');
+  }
+  assumptionEl.innerHTML = assumptions.length
+    ? '<strong>Assumptions made:</strong><br>' + assumptions.map(a => '• ' + a).join('<br>')
+    : '<strong>No unusual assumptions were made.</strong> The policy will be generated based directly on your answers.';
+}
+
+// ─── Policy generator ─────────────────────────────────────────────────────────
+function generateAndShow() {
+  policyText = generatePolicy(state);
+  document.getElementById('policy-text').textContent = policyText;
+  goToStep(7);
+}
+
+function generatePolicy(s) {
+  const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const isSmall = s.size === 'solo' || s.size === 'small';
+  const isMid = s.size === 'mid';
+  const isLarge = s.size === 'large';
+  const isHighSensitivity = s.sensitivity === 'high' || s.sensitivity === 'very_high';
+  const isVeryHigh = s.sensitivity === 'very_high';
+  const hasStartedAI = s.aiUse !== 'none';
+
+  const missionLabels = {
+    social_services: 'social services and community support',
+    education: 'education and youth development',
+    health: 'health and mental health services',
+    advocacy: 'advocacy and civic engagement',
+    environment: 'environmental and conservation work',
+    arts: 'arts, culture, and humanities',
+    housing: 'housing and economic development',
+    other: 'broad and multi-focus mission work'
+  };
+  const missionLabel = missionLabels[s.mission] || 'mission-driven work';
+
+  const ownerLabel = {
+    solo: '[Executive Director / Operations Lead]',
+    team: '[Leadership Team]',
+    committee: '[AI Governance Committee]'
+  }[s.owner] || '[Policy Owner]';
+
+  const ownerDesc = {
+    solo: 'The designated Policy Owner named above is responsible for all aspects of this policy, including implementation, questions, incident response, and scheduled review.',
+    team: 'The Leadership Team shares responsibility for policy implementation, staff questions, incident response, and scheduled review. Day-to-day coordination is assigned to one named lead within the team.',
+    committee: 'The AI Governance Committee is responsible for policy implementation, maintaining the tool registry, reviewing incidents, and conducting scheduled policy reviews. The Committee Chair serves as the primary point of contact for staff questions.'
+  }[s.owner] || '';
+
+  const toolApprovalSection = isSmall
+    ? `Before using a new AI tool for organizational work, staff should check with the Policy Owner. The following questions should guide the decision:
+  - What data will this tool process or store?
+  - What are the tool's data retention and privacy settings?
+  - Is there an organizational account, or is this a personal subscription?
+
+The Policy Owner maintains a simple list of approved tools. Staff should not use unapproved tools for Yellow or Red-tier data.`
+    : isMid
+    ? `New AI tools require review and approval before organizational use. Staff proposing a new tool should submit a brief request to the Policy Owner, including:
+  - The tool's name, vendor, and intended use
+  - What data it will process
+  - Whether an organizational account is required
+
+The Policy Owner maintains a Tool Registry listing approved tools, their approved use cases, and data tier restrictions. Tools not on the registry may not be used for Yellow or Red-tier work without prior approval.`
+    : `The AI Governance Committee maintains a Tool Registry and approves all new AI tools before organizational use. Requests must include:
+  - Tool name, vendor, and version
+  - Intended use case and department
+  - Data tier classification
+  - Privacy policy and data processing agreement (DPA) review
+  - Security assessment, if applicable
+
+Tools not on the approved registry may not be used for any work involving Yellow or Red-tier data. Emergency exceptions require Committee Chair approval in writing.`;
+
+  const incidentSection = isSmall
+    ? `An AI-related incident includes any situation where:
+  - Sensitive or Red-tier data was entered into an unapproved or public tool
+  - An AI output caused or nearly caused harm to a beneficiary, staff member, donor, or the organization
+  - AI-generated content was published externally without review and was inaccurate or harmful
+
+If an incident occurs, staff should contact the Policy Owner as soon as possible. The Policy Owner will assess the situation and determine whether escalation, stakeholder communication, or remediation is required.`
+    : isMid
+    ? `An AI-related incident includes:
+  - Unauthorized processing of Red-tier data
+  - AI-generated content that was published without required review and caused harm or reputational damage
+  - A tool vendor breach or change in data handling terms
+  - Any AI-assisted decision that affected service access, employment, or donor relations in an unintended way
+
+Staff should report incidents to the Policy Owner promptly. The Policy Owner will document the incident, assess impact, and determine whether external notification, legal consultation, or board reporting is required.`
+    : `The AI Governance Committee manages incident response. An AI-related incident includes:
+  - Unauthorized or unapproved processing of Red-tier data
+  - AI-generated content published without review that caused harm or reputational damage
+  - Vendor breach, data retention policy change, or material change in tool behavior
+  - AI involvement in decisions affecting beneficiary eligibility, employment outcomes, or donor relationships
+  - Regulatory inquiry or complaint related to AI use
+
+Staff must report suspected incidents to their supervisor and the Committee within 24 hours. The Committee will convene within 5 business days to assess severity, determine required actions, and coordinate any required external notification. A written incident log will be maintained.`;
+
+  const trainingSection = isSmall
+    ? `All staff and regular volunteers are expected to:
+  - Read and acknowledge this policy within 30 days of adoption or onboarding
+  - Ask the Policy Owner before using a new AI tool for organizational work
+  - Attend a brief orientation session when the policy is first adopted
+
+The Policy Owner is the primary resource for questions. Staff should feel welcome to ask — there are no penalties for seeking guidance before acting.`
+    : isMid
+    ? `All staff and regular contractors are expected to:
+  - Complete a basic AI literacy orientation within 60 days of policy adoption or onboarding
+  - Acknowledge receipt and understanding of this policy annually
+  - Consult the Policy Owner before adopting new AI tools
+  - Report incidents promptly
+
+Department leads are responsible for ensuring their teams understand relevant guardrails, particularly around data classification. The Policy Owner will provide a written summary and FAQ at the time of launch.`
+    : `The AI Governance Committee is responsible for a structured training and awareness program:
+  - All staff complete AI literacy training at onboarding and annually thereafter
+  - Department leads receive additional training on data classification and tool governance
+  - The Committee will maintain a resource library of approved guidance, tool sheets, and incident examples
+  - A named staff contact within each major department will serve as a first point of escalation for team questions
+  - Training completion is tracked and included in the annual policy review`;
+
+  const reviewSection = isSmall
+    ? `The Policy Owner will review this policy every 6 to 12 months, and sooner if any of the following occur:
+  - A significant AI-related incident or near-miss
+  - Adoption of a major new AI tool or platform
+  - A material change to a tool vendor's data handling practices
+  - A relevant change in law or sector-specific regulation
+  - A significant change in how the organization serves its beneficiaries`
+    : isMid
+    ? `The Policy Owner will conduct a scheduled review every 6 to 12 months. Early review is triggered by:
+  - A significant incident or near-miss
+  - Adoption of a new high-risk tool or platform
+  - A vendor data handling change or breach
+  - Regulatory change affecting the organization's jurisdiction or sector
+  - Board request or staff concern that warrants review
+
+Review outcomes will be documented and communicated to all staff.`
+    : `The AI Governance Committee will conduct a formal annual review of this policy. Review documentation will include a summary of incidents, changes in the tool registry, updated risk assessments, and any proposed policy amendments requiring board approval.
+
+Interim reviews may be called by the Committee Chair and are triggered by:
+  - A significant incident
+  - A major tool or vendor change
+  - A regulatory or sector guidance change
+  - A material change in the organization's programs or risk profile
+
+All policy changes must be approved by the Committee and communicated to staff within 30 days of adoption.`;
+
+  const missionUseExamples = {
+    social_services: '— drafting case notes summaries from Green-tier inputs, creating intake form templates, writing public program descriptions, summarizing non-sensitive meeting notes',
+    education: '— drafting lesson plan outlines, creating public-facing program descriptions, editing grant narratives from public data, summarizing non-identifying meeting notes',
+    health: '— drafting non-clinical staff communications, creating public health information content, summarizing published research, editing policy documents',
+    advocacy: '— drafting public advocacy messaging, summarizing publicly available policy documents, creating media materials from published sources, brainstorming campaign ideas',
+    environment: '— drafting grant narrative sections from public data, creating public program content, summarizing environmental reports, editing donor communications',
+    arts: '— drafting event descriptions, creating marketing copy from public sources, editing grant applications, brainstorming programming ideas',
+    housing: '— drafting program materials for public audiences, summarizing publicly available policy guidance, creating community outreach content',
+    other: '— drafting communications from public data, creating operational documentation, editing non-sensitive materials, brainstorming program design'
+  };
+  const usageExamples = missionUseExamples[s.mission] || '— drafting non-sensitive communications, creating templates, summarizing public information';
+
+  const sensitivityDisclaimer = isHighSensitivity
+    ? '\n\nDefault Red Rule: Because this organization serves sensitive populations, any data related to service delivery, case management, or individual beneficiary circumstances should be treated as Red-tier unless explicitly reclassified by the Policy Owner. When in doubt, default to Red.'
+    : '';
+
+  const aiUsePreamble = !hasStartedAI
+    ? 'This policy is adopted in anticipation of future AI use. It establishes governance expectations before tools are introduced, so that when adoption begins, clear rules are already in place. Staff are encouraged to consult the Policy Owner before using any AI tool for organizational work.'
+    : s.aiUse === 'informal'
+    ? 'This policy acknowledges that some staff currently use AI tools informally. It establishes a consistent framework to govern that use, protect beneficiary data, and ensure accountability — regardless of whether AI use is centrally approved or individually initiated.'
+    : s.aiUse === 'embedded'
+    ? 'This policy governs AI functionality embedded in existing organizational tools, as well as any standalone AI tools used for work purposes. Staff may not realize some familiar tools include AI features — this policy establishes how to recognize and govern that use.'
+    : 'This policy supports the organization\'s intentional AI program by establishing clear governance, data handling expectations, accountability structures, and review processes as the program matures.';
+
+  const lines = [];
+
+  // ── TITLE BLOCK ──────────────────────────────────────────────────────────────
+  lines.push(
+`AI ACCEPTABLE USE AND GOVERNANCE POLICY
+${'─'.repeat(44)}
+Version:       1.0
+Date adopted:  ${today}
+Policy owner:  ${ownerLabel}
+Next review:   [Set date 6–12 months from adoption]
+`);
+
+  // ── IMPORTANT NOTICE ─────────────────────────────────────────────────────────
+  lines.push(
+`IMPORTANT NOTICE
+This policy was generated using the Bridges Strategy Nonprofit AI Policy Builder. It is a governance draft and starting point — it is not legal advice. Organizations operating under sector-specific data, safeguarding, or employment regulations should have this document reviewed by legal counsel before adoption.
+`);
+
+  // ── 1. PURPOSE ───────────────────────────────────────────────────────────────
+  lines.push(
+`1. PURPOSE AND MISSION ALIGNMENT
+─────────────────────────────────────────────
+This policy establishes expectations for the responsible, ethical, and mission-aligned use of artificial intelligence (AI) by ${isSmall ? 'our organization' : 'this organization'} and all those acting on its behalf.
+
+Our work in ${missionLabel} depends on the trust of the communities we serve, our funders, and our partners. This policy exists to protect that trust, to ensure AI use serves our mission rather than novelty or convenience, and to establish clear accountability when AI tools are used in our work.
+
+${aiUsePreamble}
+`);
+
+  // ── 2. SCOPE ─────────────────────────────────────────────────────────────────
+  lines.push(
+`2. SCOPE
+─────────────────────────────────────────────
+This policy applies to:
+  • All staff, regardless of employment type (full-time, part-time, contract, or volunteer)${isLarge ? '\n  • All program areas and departments' : ''}
+  • All AI tools used for organizational purposes, whether provided by the organization or used individually
+  • AI functionality embedded in existing tools (e.g., AI writing assistants in email platforms, CRM tools with predictive features, or AI-assisted editing in communications software)
+
+This policy covers all systems that perform tasks associated with human intelligence, including but not limited to generative AI, predictive AI, and AI-assisted decision support. This scope is intentionally broad to remain relevant as AI capabilities evolve.
+`);
+
+  // ── 3. DEFINITIONS ───────────────────────────────────────────────────────────
+  lines.push(
+`3. DEFINITIONS
+─────────────────────────────────────────────
+Artificial intelligence (AI): Systems that perform tasks associated with human intelligence, such as generating text, identifying patterns in data, or making predictions. This includes embedded AI features in software products.
+
+Generative AI (GenAI): AI that generates new content — text, images, audio, or video — based on user prompts. Examples include ChatGPT, Claude, Gemini, Copilot, and similar tools.
+
+Predictive or analytical AI: AI that analyzes data to identify patterns, classify information, or produce recommendations. Examples include donor scoring tools, content recommendation systems, and data analytics platforms.
+
+Human-in-the-loop: A designated person reviews and approves AI outputs before they are used, published, shared with stakeholders, or relied on for decisions.
+
+Sensitive data: Any information that could cause harm if exposed or misused. This includes personal identifiers, beneficiary case information, health data, financial records, data about children, immigration or legal status, and HR records. See Section 4 for the full classification framework.
+`);
+
+  // ── 4. DATA HANDLING ─────────────────────────────────────────────────────────
+  lines.push(
+`4. DATA HANDLING: TRAFFIC LIGHT CLASSIFICATION
+─────────────────────────────────────────────
+All organizational data falls into one of three categories. When using AI tools, staff must identify which category applies and follow the corresponding rules.
+
+GREEN — Low sensitivity
+Examples: publicly published reports, program descriptions, blank templates, public website content, marketing copy that does not reference individuals, high-level budget information.
+Rule: Generally acceptable for use in approved AI tools, with human review before publication or use.
+
+YELLOW — Internal or draft
+Examples: internal drafts, meeting notes, planning documents, non-sensitive operational materials.
+Rule: Use with caution. Remove names and personal identifiers before pasting into AI tools. Avoid pasting raw transcripts or notes if they contain any personal details.
+
+RED — High sensitivity
+Examples: beneficiary case files, personally identifiable information (PII), donor financial records, health and mental health data, data about children, immigration or legal status, HR records, performance reviews, incident reports, and legal correspondence.
+Rule: Do not enter Red-tier data into public or unapproved AI tools under any circumstances. Use of Red-tier data with AI tools requires an organizational account with appropriate data processing agreements in place and explicit authorization from the Policy Owner.${sensitivityDisclaimer}
+`);
+
+  // ── 5. ACCEPTABLE USES ───────────────────────────────────────────────────────
+  lines.push(
+`5. ACCEPTABLE USES
+─────────────────────────────────────────────
+The following uses are generally permitted when conducted with Green or Yellow-tier data and appropriate human review:
+
+  • Drafting communications, grant narratives, reports, and program descriptions from non-sensitive inputs
+  • Editing and improving the clarity, tone, or accessibility of written content
+  • Summarizing non-sensitive meeting notes or published research (with consent for recordings where appropriate)
+  • Brainstorming for programs, fundraising, events, and strategy — using general or public information
+  • Creating templates, checklists, standard operating procedure outlines, and internal documentation
+  • Drafting policy documents using established frameworks, with human review and adaptation
+
+Specific to our mission ${usageExamples}.
+
+Human review is required before any AI-assisted output is used externally, shared with stakeholders, or relied on for decisions.
+`);
+
+  // ── 6. PROHIBITED USES ───────────────────────────────────────────────────────
+  lines.push(
+`6. PROHIBITED USES
+─────────────────────────────────────────────
+The following uses are prohibited without explicit authorization from the Policy Owner${isLarge ? ' and the AI Governance Committee' : ''}:
+
+  • Entering Red-tier data into public or unapproved AI tools
+  • Using AI to make or substantially support decisions about individual beneficiary eligibility, service access, or case outcomes
+  • Automated screening or ranking of job applicants, contractor proposals, or performance evaluations
+  • Creating deceptive, misleading, or impersonated content, or realistic synthetic media of real people without consent
+  • Publishing AI-generated statistics, research findings, legal claims, or medical claims without independent verification
+  • Representing AI-generated communications as authored by a specific human without disclosure${isHighSensitivity ? '\n  • Using AI tools of any kind for case management, clinical decision support, or safeguarding assessments without organizational approval and legal review' : ''}
+  • Using unapproved AI tools for any Yellow or Red-tier work
+`);
+
+  // ── 7. HUMAN OVERSIGHT ───────────────────────────────────────────────────────
+  lines.push(
+`7. HUMAN OVERSIGHT AND ACCOUNTABILITY
+─────────────────────────────────────────────
+AI tools do not have judgment, values, or accountability. People do. The use of AI does not reduce or transfer any individual's responsibility for the work they produce.
+
+Required review steps:
+  • All AI-assisted content used externally requires human review before use
+  • AI tools may not be the sole basis for decisions that affect individuals (beneficiaries, staff, donors, or partners)
+  • AI outputs may not be published, submitted, or distributed without a human confirming accuracy and appropriateness
+  ${isLarge ? '\n  • High-stakes uses (affecting service eligibility, HR decisions, or legal matters) require supervisor sign-off before AI outputs are acted upon' : ''}
+
+Staff are accountable for the accuracy and appropriateness of work they produce, regardless of whether AI tools were used.
+`);
+
+  // ── 8. TRANSPARENCY ──────────────────────────────────────────────────────────
+  lines.push(
+`8. TRANSPARENCY AND DISCLOSURE
+─────────────────────────────────────────────
+Honesty with stakeholders is a core organizational value. Staff should be transparent about AI use when it is material and when stakeholders may reasonably expect human authorship or judgment.
+
+Disclosure is expected when:
+  • AI tools substantially drafted external communications that are presented as personally written (e.g., donor thank-you letters presented as individually written)
+  • AI was used in a decision process that a stakeholder might reasonably expect was handled by a person
+  • A report, proposal, or public statement was substantially AI-generated
+
+Disclosure format may be brief and appropriate to context (e.g., a note that "this draft was prepared with AI assistance and reviewed by staff"). Exact language is left to staff judgment, with guidance available from the Policy Owner.
+
+Disclosure is not required for routine editing assistance, spell-checking, or drafting support where the output is substantially reviewed and revised by a human.
+`);
+
+  // ── 9. TOOL APPROVAL ─────────────────────────────────────────────────────────
+  lines.push(
+`9. TOOL AND VENDOR BOUNDARIES
+─────────────────────────────────────────────
+${toolApprovalSection}
+`);
+
+  // ── 10. INCIDENT REPORTING ───────────────────────────────────────────────────
+  lines.push(
+`10. INCIDENT REPORTING AND ESCALATION
+─────────────────────────────────────────────
+${incidentSection}
+`);
+
+  // ── 11. TRAINING ─────────────────────────────────────────────────────────────
+  lines.push(
+`11. TRAINING AND AWARENESS
+─────────────────────────────────────────────
+${trainingSection}
+`);
+
+  // ── 12. GOVERNANCE ───────────────────────────────────────────────────────────
+  lines.push(
+`12. POLICY GOVERNANCE AND ACCOUNTABILITY
+─────────────────────────────────────────────
+Policy owner: ${ownerLabel}
+
+${ownerDesc}
+
+${isMid || isLarge ? 'Staff questions, tool requests, and incident reports should be directed to the Policy Owner or designated contact in the first instance.' : 'Staff are encouraged to direct any questions about this policy to the Policy Owner before taking uncertain actions.'}
+`);
+
+  // ── 13. REVIEW CADENCE ───────────────────────────────────────────────────────
+  lines.push(
+`13. POLICY REVIEW AND UPDATES
+─────────────────────────────────────────────
+${reviewSection}
+`);
+
+  // ── 14. DISCLAIMER ───────────────────────────────────────────────────────────
+  lines.push(
+`14. SCOPE AND LIMITATIONS
+─────────────────────────────────────────────
+This policy governs organizational AI use but does not constitute legal advice, regulatory compliance certification, or a guarantee of data security. Organizations operating in regulated sectors (health, childcare, employment services, housing, legal services) should seek appropriate legal and regulatory guidance.
+
+This policy is a living document. It is expected to be revised as the organization's use of AI evolves and as the regulatory and technical landscape changes.
+
+─────────────────────────────────────────────
+Adopted by: _____________________________ Date: _________________
+Title:      _____________________________
+Organization: ___________________________
+
+─────────────────────────────────────────────
+This policy was drafted using the Bridges Strategy Nonprofit AI Policy Builder.
+bridgesstrategy.com | mark@bridgesstrategy.com`);
+
+  return lines.join('\n');
+}
+
+// ─── Department guardrails appendix ──────────────────────────────────────────
+function addGuardrails() {
+  const appendix = `
+
+═══════════════════════════════════════════════
+APPENDIX A: DEPARTMENT-SPECIFIC GUARDRAILS
+═══════════════════════════════════════════════
+These guardrails supplement the main policy. In cases of conflict, the main policy applies.
+
+FUNDRAISING AND GRANT WRITING
+─────────────────────────────────────────────
+Permitted:
+  • Drafting thank-you letters, acknowledgment language, and donor communications from Green-tier inputs
+  • Summarizing grant requirements from public sources
+  • Drafting grant narrative sections using public data and organizational summary information
+  • Brainstorming campaign ideas and messaging themes
+
+Guardrails:
+  • Do not paste donor giving history, wealth screening outputs, or personal donor notes into public AI tools
+  • Do not submit AI-generated grant text without substantive human review and editing — funders expect authentic organizational voice
+  • Verify all statistics, claims, and program descriptions before submission
+
+HUMAN RESOURCES
+─────────────────────────────────────────────
+Permitted:
+  • Drafting job descriptions and posting templates
+  • Creating interview question banks and structured evaluation rubrics
+  • Summarizing publicly available compensation or benefits research
+  • Drafting HR policy templates and staff communication drafts
+
+Guardrails:
+  • Do not use AI for candidate screening, ranking, or shortlisting without strong human oversight and bias review
+  • Do not paste performance reviews, complaints, disciplinary records, or HR investigations into any AI tool
+  • Do not use AI for employment decisions affecting compensation, promotion, or termination
+  • All HR-related AI outputs require HR lead or supervisor review before any action
+
+MARKETING AND COMMUNICATIONS
+─────────────────────────────────────────────
+Permitted:
+  • Repurposing published reports, public data, and approved program descriptions into social content
+  • Drafting press releases and newsletters from Green-tier sources
+  • Editing for accessibility, clarity, and tone
+  • Generating abstract or non-photorealistic images for program materials
+
+Guardrails:
+  • Do not create photorealistic images of real beneficiaries, staff, or stakeholders without explicit consent
+  • Fact-check all statistics and program claims before publication
+  • Disclose AI assistance in public-facing contexts where stakeholders may reasonably expect human authorship
+  • Authentic organizational voice must be maintained — AI-drafted content requires substantive human editing
+
+OPERATIONS AND ADMINISTRATION
+─────────────────────────────────────────────
+Permitted:
+  • Drafting internal procedures, SOPs, and operational guidelines
+  • Meeting summaries in low-sensitivity contexts (non-HR, non-legal, non-case-related)
+  • Spreadsheet formulas, data analysis templates, and administrative documentation
+  • Drafting vendor communications and routine correspondence
+
+Guardrails:
+  • Do not use transcription AI during HR, legal, safeguarding, or sensitive operational discussions without prior approval
+  • Confirm tool data retention settings before using AI in any meeting context
+  • Restrict admin account access to approved organizational accounts only
+
+PROGRAMS AND SERVICE DELIVERY
+─────────────────────────────────────────────
+Permitted:
+  • Drafting program materials, outreach content, and educational resources using Green-tier inputs
+  • Summarizing publicly available research and sector guidance
+  • Preparing non-identifying communications on behalf of programs
+  • Brainstorming program design and evaluation approaches
+
+Guardrails:
+  • Do not use AI to make or inform decisions about individual beneficiary eligibility, case outcomes, or service access
+  • Do not enter case files, client identifiers, or session notes into any AI tool
+  • All client-facing content requires human review before distribution
+  • Where programs serve vulnerable populations, apply the Red default rule to all service-related data`;
+
+  policyText += appendix;
+  document.getElementById('policy-text').textContent = policyText;
+  document.getElementById('guardrails-prompt').style.display = 'none';
+}
+
+// ─── Copy to clipboard ────────────────────────────────────────────────────────
+function copyPolicy() {
+  navigator.clipboard.writeText(policyText).then(() => {
+    const btn = document.getElementById('copy-btn');
+    const notice = document.getElementById('copy-notice');
+    btn.classList.add('copied');
+    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+    notice.textContent = 'Paste into Word or Google Docs — formatting converts cleanly.';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy full policy`;
+      notice.textContent = '';
+    }, 4000);
+  }).catch(() => {
+    // Fallback: select text in the box
+    const el = document.getElementById('policy-text');
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    document.getElementById('copy-notice').textContent = 'Text selected — press Ctrl+C (or Cmd+C) to copy.';
+  });
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+buildOptions();
+</script>
+
+</body>
+</html>
