@@ -210,6 +210,54 @@ li {
   margin-bottom: 0.6rem;
 }
 
+/* Process graphic */
+.process-graphic {
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+  background: #f0f5f6;
+  text-align: center;
+}
+
+.process-graphic img {
+  width: 100%;
+  max-width: 860px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* About layout — photo + text side by side */
+.about-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.about-photo {
+  width: 180px;
+  min-width: 180px;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+  display: block;
+}
+
+.about-text {
+  flex: 1;
+}
+
+@media (max-width: 600px) {
+  .about-layout {
+    flex-direction: column;
+  }
+
+  .about-photo {
+    width: 140px;
+  }
+}
+
 /* Blockquote */
 blockquote {
   margin: 2rem 0;
