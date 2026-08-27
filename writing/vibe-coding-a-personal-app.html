@@ -54,7 +54,7 @@
 
       <p>"Vibe coding" (basically: describe what you want in plain language, and AI generates working software you iterate on) is moving fast enough that if your opinion is based on what you tried a month ago, you may already be out of date.</p>
 
-      <img src="images/vibe-coding-a-personal-app.jpg" alt="BoneHealth calcium tracker app built with AI-assisted vibe coding">
+      <img src="images/vibe-coding-a-personal-app.jpg" loading="lazy" alt="BoneHealth calcium tracker app built with AI-assisted vibe coding">
 
       <p>A small personal example made this real for me.</p>
 
@@ -81,12 +81,12 @@
 
     <div class="subscribe-mini">
       <h3>Stay current on AI in the nonprofit sector</h3>
-      <p>A weekly digest for nonprofit leaders. Sent every Tuesday. No spam.</p>
+      <p>A weekly digest for nonprofit leaders. Sent every Monday. No spam.</p>
       <form class="subscribe-form">
-        <input type="email" placeholder="your@email.com" required autocomplete="email" />
+        <input type="email" aria-label="Email address" placeholder="your@email.com" required autocomplete="email" />
         <button type="submit">Subscribe</button>
       </form>
-      <p class="subscribe-note" style="display:none;"></p>
+      <p class="subscribe-note" role="status" aria-live="polite" style="display:none;"></p>
     </div>
   </main>
 
@@ -111,7 +111,7 @@
       .then(function(r) { return r.json(); })
       .then(function(data) {
         if (msg) { msg.textContent = data.message || data.error; msg.style.display = 'block'; }
-        if (data.message) { input.value = ''; msg.style.color = '#4f8f9b'; }
+        if (data.message) { input.value = ''; msg.style.color = '#3d7a85'; }
         else { msg.style.color = '#e53e3e'; }
         btn.disabled = false;
         btn.textContent = 'Subscribe';

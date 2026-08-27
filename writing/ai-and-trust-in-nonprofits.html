@@ -50,7 +50,7 @@
     <div class="post-body">
       <p>I came across <a href="https://blog.candid.org/post/back-to-human-using-ai-responsibly-to-strengthen-trust-in-nonprofits/" target="_blank" rel="noopener noreferrer">this piece by Tasha Van Vlack on Candid Insights</a> — a timely reminder as we head into 2026. AI is already woven into everyday nonprofit work (drafting, summarizing, translating, reporting). The question is whether we adopt it in ways that increase trust, or quietly chip away at it.</p>
 
-      <img src="images/ai-and-trust-in-nonprofits.png" alt="Back to human: using AI responsibly to strengthen trust in nonprofits">
+      <img src="images/ai-and-trust-in-nonprofits.png" loading="lazy" alt="Back to human: using AI responsibly to strengthen trust in nonprofits">
 
       <p>A few lines that stayed with me:</p>
       <ul>
@@ -68,12 +68,12 @@
 
     <div class="subscribe-mini">
       <h3>Stay current on AI in the nonprofit sector</h3>
-      <p>A weekly digest for nonprofit leaders. Sent every Tuesday. No spam.</p>
+      <p>A weekly digest for nonprofit leaders. Sent every Monday. No spam.</p>
       <form class="subscribe-form">
-        <input type="email" placeholder="your@email.com" required autocomplete="email" />
+        <input type="email" aria-label="Email address" placeholder="your@email.com" required autocomplete="email" />
         <button type="submit">Subscribe</button>
       </form>
-      <p class="subscribe-note" style="display:none;"></p>
+      <p class="subscribe-note" role="status" aria-live="polite" style="display:none;"></p>
     </div>
   </main>
 
@@ -98,7 +98,7 @@
       .then(function(r) { return r.json(); })
       .then(function(data) {
         if (msg) { msg.textContent = data.message || data.error; msg.style.display = 'block'; }
-        if (data.message) { input.value = ''; msg.style.color = '#4f8f9b'; }
+        if (data.message) { input.value = ''; msg.style.color = '#3d7a85'; }
         else { msg.style.color = '#e53e3e'; }
         btn.disabled = false;
         btn.textContent = 'Subscribe';

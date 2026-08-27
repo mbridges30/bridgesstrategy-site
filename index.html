@@ -67,7 +67,7 @@
   <main>
 
     <section class="process-graphic">
-      <img src="assets/assess-align-act.png" alt="The Bridges Strategy process: Assess, Align, Act" />
+      <img src="assets/assess-align-act.webp" alt="The Bridges Strategy process: Assess, Align, Act" />
     </section>
 
     <section id="how-i-help">
@@ -125,7 +125,7 @@
     <section id="about">
       <h2>About</h2>
       <div class="about-layout">
-        <img src="assets/mark-bridges.jpg" alt="Mark Bridges" class="about-photo" />
+        <img src="assets/mark-bridges.jpg" alt="Mark Bridges" class="about-photo" width="480" height="639" loading="lazy" />
         <div class="about-text">
           <p>
             I'm Mark Bridges. I spent three years as CEO at <a href="https://www.athletica.ai" target="_blank" rel="noopener noreferrer">Athletica.ai</a>, an AI-powered fitness technology company, where I led AI product development, managed organizational change, and built data-driven workflows from the ground up. Before that, I co-founded iwonder and held an advisory role at <a href="https://www.spideo.tv" target="_blank" rel="noopener noreferrer">Spideo</a>, a Paris-based video intelligence company, focused on product strategy, business development, and fundraising.
@@ -187,12 +187,12 @@
 
     <section id="subscribe">
       <h2>Stay current on AI in the nonprofit sector</h2>
-      <p>A weekly digest of curated news and use cases for nonprofit leaders. Sent every Tuesday.</p>
+      <p>A weekly digest of curated news and use cases for nonprofit leaders. Sent every Monday.</p>
       <form id="subscribe-form" class="subscribe-form">
-        <input type="email" id="subscribe-email" placeholder="your@email.com" required autocomplete="email" />
+        <input type="email" id="subscribe-email" aria-label="Email address" placeholder="your@email.com" required autocomplete="email" />
         <button type="submit">Subscribe</button>
       </form>
-      <p id="subscribe-msg" class="subscribe-note" style="display:none;"></p>
+      <p id="subscribe-msg" class="subscribe-note" role="status" aria-live="polite" style="display:none;"></p>
       <p class="subscribe-note">No spam. Unsubscribe anytime. We do not share subscriber data.</p>
     </section>
 
@@ -251,7 +251,7 @@
       .then(function(r) { return r.json(); })
       .then(function(data) {
         if (msg) { msg.textContent = data.message || data.error; msg.style.display = 'block'; }
-        if (data.message) { input.value = ''; msg.style.color = '#4f8f9b'; }
+        if (data.message) { input.value = ''; msg.style.color = '#3d7a85'; }
         else { msg.style.color = '#e53e3e'; }
         btn.disabled = false;
         btn.textContent = 'Subscribe';

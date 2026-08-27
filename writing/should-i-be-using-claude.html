@@ -50,7 +50,7 @@
     <div class="post-body">
       <p>In the last two weeks, three different people have asked me: "Should I be using Claude now? I heard it's the best one."</p>
 
-      <img src="images/should-i-be-using-claude.jpg" alt="Noise versus signal: filtering AI hype from what matters">
+      <img src="images/should-i-be-using-claude.jpg" loading="lazy" alt="Noise versus signal: filtering AI hype from what matters">
 
       <p>A week later, OpenAI released ChatGPT 5.4 and the pendulum has swung again. This is the pattern. Every week brings another release framed as the thing you should have been paying attention to yesterday. Claude Cowork. A new ChatGPT. OpenClaw. Headlines declaring the death of software.</p>
 
@@ -75,12 +75,12 @@
 
     <div class="subscribe-mini">
       <h3>Stay current on AI in the nonprofit sector</h3>
-      <p>A weekly digest for nonprofit leaders. Sent every Tuesday. No spam.</p>
+      <p>A weekly digest for nonprofit leaders. Sent every Monday. No spam.</p>
       <form class="subscribe-form">
-        <input type="email" placeholder="your@email.com" required autocomplete="email" />
+        <input type="email" aria-label="Email address" placeholder="your@email.com" required autocomplete="email" />
         <button type="submit">Subscribe</button>
       </form>
-      <p class="subscribe-note" style="display:none;"></p>
+      <p class="subscribe-note" role="status" aria-live="polite" style="display:none;"></p>
     </div>
   </main>
 
@@ -105,7 +105,7 @@
       .then(function(r) { return r.json(); })
       .then(function(data) {
         if (msg) { msg.textContent = data.message || data.error; msg.style.display = 'block'; }
-        if (data.message) { input.value = ''; msg.style.color = '#4f8f9b'; }
+        if (data.message) { input.value = ''; msg.style.color = '#3d7a85'; }
         else { msg.style.color = '#e53e3e'; }
         btn.disabled = false;
         btn.textContent = 'Subscribe';

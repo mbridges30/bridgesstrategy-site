@@ -75,12 +75,12 @@
 
     <section id="subscribe">
       <h2>Stay current on AI in the nonprofit sector</h2>
-      <p>A weekly digest of curated news and use cases for nonprofit leaders. Sent every Tuesday.</p>
+      <p>A weekly digest of curated news and use cases for nonprofit leaders. Sent every Monday.</p>
       <form class="subscribe-form">
-        <input type="email" placeholder="your@email.com" required autocomplete="email" />
+        <input type="email" aria-label="Email address" placeholder="your@email.com" required autocomplete="email" />
         <button type="submit">Subscribe</button>
       </form>
-      <p class="subscribe-note" style="display:none;"></p>
+      <p class="subscribe-note" role="status" aria-live="polite" style="display:none;"></p>
       <p class="subscribe-note">No spam. Unsubscribe anytime. We do not share subscriber data.</p>
     </section>
 
@@ -107,7 +107,7 @@
       .then(function(r) { return r.json(); })
       .then(function(data) {
         if (msg) { msg.textContent = data.message || data.error; msg.style.display = 'block'; }
-        if (data.message) { input.value = ''; msg.style.color = '#4f8f9b'; }
+        if (data.message) { input.value = ''; msg.style.color = '#3d7a85'; }
         else { msg.style.color = '#e53e3e'; }
         btn.disabled = false;
         btn.textContent = 'Subscribe';
