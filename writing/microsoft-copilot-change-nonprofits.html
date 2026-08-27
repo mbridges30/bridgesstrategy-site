@@ -29,8 +29,7 @@
 <body>
   <nav class="site-nav">
     <a href="/" class="nav-brand">
-      <img src="../assets/logo-icon.svg" alt="Bridges Strategy" />
-      Bridges Strategy
+      <img src="../assets/logo-full.svg" alt="Bridges Strategy" />
     </a>
     <div class="nav-links">
       <a href="../index.html#how-i-help">How I help</a>
@@ -69,6 +68,51 @@
       <p class="post-source"><a href="https://www.computerworld.com/article/4150022/microsoft-backtracks-on-copilot-chat-access-in-m365-apps.html" target="_blank" rel="noopener noreferrer">Microsoft backtracks on Copilot Chat access in M365 apps — Computerworld &rarr;</a></p>
     </div>
     <p class="post-back"><a href="../writing/">&larr; Back to writing</a></p>
+    <div class="subscribe-mini">
+      <h3>Stay current on AI in the nonprofit sector</h3>
+      <p>A weekly digest for nonprofit leaders. Sent every Monday. No spam.</p>
+      <form class="subscribe-form">
+        <input type="email" aria-label="Email address" placeholder="your@email.com" required autocomplete="email" />
+        <button type="submit">Subscribe</button>
+      </form>
+      <p class="subscribe-note" role="status" aria-live="polite" style="display:none;"></p>
+    </div>
   </main>
+
+  <footer>
+    <p>&copy; 2026 Bridges Strategy &middot; <a href="https://www.linkedin.com/in/mbridges30" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+  </footer>
+
+  <script>
+  document.querySelectorAll('.subscribe-form').forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var input = form.querySelector('input[type="email"]');
+      var btn = form.querySelector('button');
+      var msg = form.nextElementSibling;
+      btn.disabled = true;
+      btn.textContent = '...';
+      fetch('https://radar.bridgesstrategy.com/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: input.value.trim() })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (msg) { msg.textContent = data.message || data.error; msg.style.display = 'block'; }
+        if (data.message) { input.value = ''; msg.style.color = '#3d7a85'; }
+        else { msg.style.color = '#e53e3e'; }
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+      })
+      .catch(function() {
+        if (msg) { msg.textContent = 'Something went wrong.'; msg.style.display = 'block'; msg.style.color = '#e53e3e'; }
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+      });
+    });
+  });
+  </script>
+
 </body>
 </html>
