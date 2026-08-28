@@ -232,6 +232,55 @@
       color: #4a3a17;
     }
     .caution-box p:last-child { margin-bottom: 0; }
+
+    /* ---- Page-specific: collapsible detail ---- */
+    details.reveal {
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      background: #fff;
+      margin: 1.25rem 0;
+    }
+
+    details.reveal > summary {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.8rem 1rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent-hover);
+      list-style: none;
+      border-radius: 6px;
+    }
+
+    details.reveal > summary::-webkit-details-marker { display: none; }
+
+    details.reveal > summary::before {
+      content: "";
+      flex: none;
+      border: solid var(--accent-hover);
+      border-width: 0 2px 2px 0;
+      padding: 3px;
+      transform: rotate(-45deg);
+      transition: transform 0.2s;
+    }
+
+    details.reveal[open] > summary::before { transform: rotate(45deg); }
+
+    details.reveal > summary:hover { background: var(--accent-light); }
+
+    details.reveal[open] > summary {
+      border-bottom: 1px solid #eee;
+      border-radius: 6px 6px 0 0;
+    }
+
+    .reveal-body { padding: 0.25rem 1rem 1rem; }
+    .reveal-body > *:last-child { margin-bottom: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      details.reveal > summary::before { transition: none; }
+    }
   </style>
 </head>
 <body>
@@ -261,23 +310,10 @@
   <main>
 
     <section>
-      <h2>A policy nobody reads is a policy nobody follows</h2>
       <p>
-        Most AI policies end up as a PDF in a shared drive. Staff hit a question
-        mid-task &mdash; <em>can I put this in Copilot?</em> &mdash; and either guess,
-        or email someone and wait two days.
-      </p>
-      <p>
-        This sits between those two outcomes. It answers in seconds, strictly from your
-        documents, and hands off to a named person the moment it isn't certain.
-      </p>
-    </section>
-
-    <section>
-      <h2>See it working</h2>
-      <p>
-        The demo runs on a fictional nonprofit &mdash; Riverside Community Trust &mdash;
-        with a complete AI policy and an approved tools list behind it.
+        Most AI policies end up as a PDF nobody opens. Staff hit a question mid-task
+        &mdash; <em>can I put this in Copilot?</em> &mdash; and either guess or wait two days
+        for an answer. This is the thing in between.
       </p>
 
       <div class="demo-exchange">
@@ -314,9 +350,8 @@
       </div>
 
       <p>
-        The second answer is the one worth noticing. That rule sits in the approved tools
-        list rather than the policy itself &mdash; the assistant finds it, says which
-        document it came from, and stops rather than guessing.
+        The second rule lives in the approved tools list rather than the policy itself. The
+        assistant finds it, says which document it came from, and stops rather than guessing.
       </p>
 
       <p><strong>Try asking it:</strong></p>
@@ -330,79 +365,42 @@
         <a class="cta-button" href="https://aipolicy.bridgesstrategy.com/demo/" target="_blank" rel="noopener noreferrer">Try the demo &rarr;</a>
         <a class="cta-button cta-button--secondary" href="sample-ai-policy.html">Read the policy it uses &rarr;</a>
       </div>
-
-      <p>
-        Reading the <a href="sample-ai-policy.html">source policy</a> alongside the answers is
-        worth a few minutes. Every verdict traces back to a clause you can find, which is the
-        whole basis for trusting it &mdash; and it makes obvious how much the quality of the
-        answers depends on the quality of the policy.
-      </p>
     </section>
 
     <section>
-      <h2>The admin side</h2>
+      <h2>Look inside the admin side</h2>
       <p>
-        The half nobody sees in a demo, and the half that makes it worth building. Whoever
-        owns the policy gets a dashboard: every question asked, filterable by Green, Yellow
-        or Red and by date, with the documents editable in the browser.
-      </p>
-      <p>
-        You can log into the demo's dashboard and look around. It is a view-only account, so
-        the documents and the log are read-only &mdash; everything else works exactly as it
-        does for a real administrator.
+        Whoever owns the policy gets a dashboard: every question asked, filterable by verdict
+        and date, with the documents editable in the browser. Log in and look around &mdash;
+        it's a view-only account, so nothing you click will change anything.
       </p>
 
       <div class="note-box">
         <p>
-          <strong>Demo dashboard</strong><br>
           <a href="https://aipolicy.bridgesstrategy.com/demo/admin/login" target="_blank" rel="noopener noreferrer">aipolicy.bridgesstrategy.com/demo/admin/login</a><br>
-          Email: <code>viewer@bridgesstrategy.com</code><br>
-          Password: <code>SeeTheDashboard</code>
+          <code>viewer@bridgesstrategy.com</code> &middot; <code>SeeTheDashboard</code>
         </p>
       </div>
 
       <p>
-        The question log fills up with whatever visitors to this page have asked, which makes
-        it a reasonable illustration of the real thing: a pile of unfiltered questions, some
-        of them revealing. That is what the policy owner reads once a month.
+        The log fills with whatever visitors to this page have asked, which is a fair
+        illustration of the real thing: a pile of unfiltered questions, some of them
+        revealing. That is what the policy owner reads once a month.
       </p>
     </section>
 
     <section>
-      <h2>What makes it trustworthy</h2>
-
-      <h3>It only knows your documents</h3>
-      <p>
-        No general knowledge about AI, no advice from the internet, no filling gaps with
-        something plausible. If your policy doesn't cover it, it says so.
-      </p>
-
-      <h3>A verdict, not an essay</h3>
-      <p>
-        Green, Yellow or Red, then two sentences of plain English and the document it came
-        from. Readable on a phone between meetings.
-      </p>
-
-      <h3>It knows when to stop</h3>
-      <p>
-        Anything ambiguous, prohibited or beyond the documents ends with a named person to
-        contact. It removes hesitation; it doesn't replace judgement.
-      </p>
-
-      <h3>It keeps a record</h3>
-      <p>
-        Every question is logged. Reviewed monthly, that log is a live map of where your
-        policy is unclear &mdash; written by the people who actually have to follow it.
-      </p>
+      <h2>Why the answers hold up</h2>
+      <ul>
+        <li><strong>It only knows your documents.</strong> No general knowledge, no advice from the internet. If your policy doesn't cover it, it says so.</li>
+        <li><strong>A verdict, not an essay.</strong> Green, Yellow or Red, two sentences, and the document it came from.</li>
+        <li><strong>It knows when to stop.</strong> Anything ambiguous or prohibited ends with a named person to contact.</li>
+        <li><strong>It keeps a record.</strong> The log is a live map of where your policy is unclear, written by the people who have to follow it.</li>
+      </ul>
     </section>
 
     <section>
-      <h2>Two ways to do this</h2>
-      <p>
-        One you can put together this afternoon with no help from anyone. One that is a
-        proper application, hosted at your own web address &mdash; which is what the demo
-        above actually is.
-      </p>
+      <h2>Two ways to build it</h2>
 
       <div class="table-scroll">
         <table class="setup-table">
@@ -414,56 +412,40 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Setup</td>
-              <td>About fifteen minutes</td>
-              <td>About a day</td>
-            </tr>
-            <tr>
-              <td>Cost</td>
-              <td>Free, using seats you already pay for</td>
-              <td>Around $10 a month, all in</td>
-            </tr>
-            <tr>
-              <td>Staff access</td>
-              <td>Anyone with a paid AI account</td>
-              <td>Anyone with the link &mdash; no login at all</td>
-            </tr>
-            <tr>
-              <td>Question log</td>
-              <td>None</td>
-              <td>Every question, automatically and anonymously</td>
-            </tr>
-            <tr>
-              <td>Documents</td>
-              <td>Pasted into the assistant's instructions</td>
-              <td>Managed in a browser by whoever owns the policy</td>
-            </tr>
-            <tr>
-              <td>Lives</td>
-              <td>Inside your AI tool</td>
-              <td>At your own web address</td>
-            </tr>
+            <tr><td>Setup</td><td>About fifteen minutes</td><td>About a day</td></tr>
+            <tr><td>Cost</td><td>Free, on seats you already pay for</td><td>Around $10 a month</td></tr>
+            <tr><td>Staff access</td><td>Anyone with a paid AI account</td><td>Anyone with the link &mdash; no login</td></tr>
+            <tr><td>Question log</td><td>None</td><td>Automatic and anonymous</td></tr>
+            <tr><td>Documents</td><td>Pasted into the assistant</td><td>Edited in a browser</td></tr>
+            <tr><td>Lives</td><td>Inside your AI tool</td><td>At your own web address</td></tr>
           </tbody>
         </table>
       </div>
+
+      <p>
+        <strong>Start with the free one.</strong> A policy your staff can actually question
+        beats a better plan you haven't built &mdash; and you'll learn what people ask before
+        spending anything.
+      </p>
     </section>
 
     <section>
       <h2>Option 1 &mdash; build it yourself</h2>
       <p>
-        An assistant your staff can ask, that hands off to a named person when it isn't
-        sure. No log, no admin side, no developer. You need your AI policy as text you can
-        copy, and someone willing to be the contact for anything unclear.
+        Paste your policy and the prompt below into a custom assistant in whatever AI tool
+        you already use. Staff ask it; anything unclear goes to a named person. You need your
+        policy as text you can copy, and someone willing to be that contact.
       </p>
 
-      <ol class="setup-steps">
-        <li>Open the AI tool your organisation already uses and create a new custom assistant &mdash; a <strong>Custom GPT</strong> in ChatGPT, a <strong>Project</strong> in Claude, a <strong>Gem</strong> in Gemini, or an <strong>agent</strong> in Copilot.</li>
-        <li>Copy the prompt below into its instructions.</li>
-        <li>Replace the highlighted placeholders with your organisation's name, your policy owner, and their email.</li>
-        <li>Paste your full policy text where the prompt says to.</li>
-        <li>Save it, then share the link &mdash; in Teams, on your intranet, or in an email signature.</li>
-      </ol>
+      <details class="reveal">
+        <summary>Setup steps and the prompt</summary>
+        <div class="reveal-body">
+          <ol class="setup-steps">
+            <li>Create a new custom assistant &mdash; a <strong>Custom GPT</strong> in ChatGPT, a <strong>Project</strong> in Claude, a <strong>Gem</strong> in Gemini, or an <strong>agent</strong> in Copilot.</li>
+            <li>Copy the prompt below into its instructions.</li>
+            <li>Replace the highlighted placeholders, and paste your policy where it says to.</li>
+            <li>Save it and share the link &mdash; in Teams, on your intranet, or in an email signature.</li>
+          </ol>
 
       <div class="prompt-block">
         <div class="prompt-head">
@@ -501,125 +483,81 @@ general question and remind the person to leave personal details out.
 --- POLICY ENDS ---</pre>
       </div>
 
-      <div class="caution-box">
-        <p>
-          <strong>Paste the policy into the instructions rather than attaching it as a
-          file.</strong> Attached files get searched in fragments, so the assistant
-          sometimes misses a relevant clause. Pasted text is always fully in view. For
-          policies under about twenty pages this makes a real difference to accuracy.
-        </p>
-      </div>
+          <div class="caution-box">
+            <p>
+              <strong>Paste the policy in rather than attaching it as a file.</strong>
+              Attached files get searched in fragments, so the assistant sometimes misses a
+              clause. Pasted text is always fully in view.
+            </p>
+          </div>
 
-      <div class="note-box">
-        <p>
-          <strong>Got more than one document?</strong> Most real questions turn on the
-          detail in an approved tools list or a data guide rather than the policy itself.
-          Paste those in too, and add this line above them so the assistant knows which one
-          wins: <em>&ldquo;These sources are listed in order of authority. The AI Use Policy
-          governs &mdash; if a supporting document conflicts with it, follow the policy and
-          say you noticed the conflict.&rdquo;</em>
-        </p>
-      </div>
+          <p>
+            <strong>More than one document?</strong> Paste them all in, and add this line
+            above them: <em>&ldquo;These sources are listed in order of authority. The AI Use
+            Policy governs &mdash; if a supporting document conflicts with it, follow the
+            policy and say you noticed the conflict.&rdquo;</em>
+          </p>
+        </div>
+      </details>
     </section>
 
     <section>
       <h2>Option 2 &mdash; a purpose-built assistant</h2>
       <p>
-        A small web application that lives at your own address &mdash;
-        <em>aipolicy.yourorganisation.org</em> &mdash; and does the job properly. This is
-        what you tried at the top of this page.
+        A small web application at your own address, which is what you tried at the top of
+        this page. Staff need no login at all &mdash; which matters, because the people most
+        likely to have a policy question are often the ones without a paid AI licence. Every
+        question is logged automatically and anonymously, and whoever owns the policy edits
+        the documents themselves.
       </p>
 
-      <h3>Nobody has to log in</h3>
-      <p>
-        Staff click a link and ask. No account, no seat, no password. That matters more
-        than it sounds: in most nonprofits only some people have a paid AI licence, and the
-        ones most likely to have a policy question are often the ones without one.
-      </p>
+      <details class="reveal">
+        <summary>What it takes to run one</summary>
+        <div class="reveal-body">
+          <p>
+            Around $10 a month for hosting and AI usage combined, an account with an AI
+            provider, and about a day to set up. It runs on infrastructure you own and pay
+            for, so it stays yours &mdash; and everything exports as a single file if you
+            ever move it.
+          </p>
+          <p>
+            I can build it with you or for you. If you have someone technical in-house, it
+            is a genuinely small application: the version behind the demo on this page was
+            built in an afternoon with an AI coding tool, which is rather the point.
+          </p>
+        </div>
+      </details>
 
-      <h3>Every question is logged, anonymously</h3>
-      <p>
-        Nothing to fill in, nothing to remember. The question and the answer are recorded
-        automatically, with no name attached to either. Anonymity isn't an oversight &mdash;
-        it's the point. People ask the awkward question when it can't be traced back to
-        them, and the awkward questions are the ones you most need to see.
-      </p>
-
-      <h3>An admin dashboard for whoever owns the policy</h3>
-      <p>
-        They log in and see every question asked, filterable by Green, Yellow or Red and by
-        date. They can add, edit and retire documents in the browser &mdash; no redeploying
-        anything &mdash; and update the named contact staff are pointed at. Change the
-        policy in the morning and the answers change immediately.
-      </p>
-
-      <h3>What it takes</h3>
-      <p>
-        Around $10 a month for hosting and AI usage combined, an account with an AI
-        provider, and about a day to set up. It runs on infrastructure you own and pay for,
-        so it stays yours &mdash; and if you ever want to move it, everything exports as a
-        single file.
-      </p>
-      <p>
-        I can build it with you or for you. If you have someone technical in-house, it is a
-        genuinely small application &mdash; the version behind the demo on this page was
-        built in an afternoon with an AI coding tool, which is rather the point.
-      </p>
-    </section>
-
-    <section>
-      <h2>Using the log &mdash; the part most people skip</h2>
-      <p>
-        The answers help one person for one minute. The log is what improves the policy,
-        and it's worth putting a recurring half hour in the diary for it. This applies
-        whether you're reading a dashboard or a handful of forwarded emails.
-      </p>
-
-      <ol class="setup-steps">
-        <li><strong>Read the month's questions in one sitting.</strong> Themes are obvious in a batch and invisible one at a time.</li>
-        <li><strong>Look for repeats.</strong> The same question asked three times is a gap in the policy, not three confused people.</li>
-        <li><strong>Edit the document, not the assistant.</strong> Add the missing clause to your policy and the assistant improves immediately &mdash; and stays auditable, because every answer still traces back to an approved document.</li>
-        <li><strong>Tell people what changed.</strong> Staff who see their question turn into policy ask more questions. That's the flywheel.</li>
-      </ol>
-
-      <div class="caution-box">
-        <p>
-          <strong>Don't let the assistant learn from its own answers.</strong> It's
-          tempting, but a policy tool has to be auditable &mdash; you need to be able to
-          say why it gave an answer and point at the clause. Keep the humans in the loop
-          and the documents as the single source of truth.
-        </p>
-      </div>
-    </section>
-
-    <section>
-      <h2>Which one you need</h2>
-      <p>
-        <strong>Start with Option 1.</strong> It costs nothing, it takes an afternoon, and a
-        policy your staff can actually ask questions of beats a better plan you haven't
-        built. You'll also learn what people ask, which is worth knowing before you spend
-        anything.
-      </p>
-      <p>
-        Three things tend to push organisations to Option 2. You want to see
-        <em>everything</em> being asked rather than only what reaches you. Staff without a
-        paid AI licence need it too. Or the person who owns the policy wants to manage the
-        documents themselves, without going back to whoever set the assistant up.
-      </p>
-      <p>
-        Be aware of one limit either way: a prompt asks an AI tool for consistency, where an
-        application enforces it. Expect the DIY version to drift from its format
-        occasionally. It's a fair trade at zero cost, and it's the main thing you're buying
-        out of when you move up.
-      </p>
+      <details class="reveal">
+        <summary>Getting value from the question log</summary>
+        <div class="reveal-body">
+          <p>
+            The answers help one person for a minute. The log is what improves the policy.
+            Half an hour a month is enough:
+          </p>
+          <ol class="setup-steps">
+            <li><strong>Read the month in one sitting.</strong> Themes are obvious in a batch and invisible one at a time.</li>
+            <li><strong>Look for repeats.</strong> The same question three times is a gap in the policy, not three confused people.</li>
+            <li><strong>Edit the document, not the assistant.</strong> Add the missing clause and the answers change immediately &mdash; and stay traceable to an approved document.</li>
+            <li><strong>Tell people what changed.</strong> Staff who see their question become policy ask more questions.</li>
+          </ol>
+          <div class="caution-box">
+            <p>
+              <strong>Don't let it learn from its own answers.</strong> A policy tool has to
+              be auditable &mdash; you need to point at the clause behind any verdict. Keep
+              the documents as the single source of truth.
+            </p>
+          </div>
+        </div>
+      </details>
     </section>
 
     <section>
       <h2>Or we can do it together</h2>
       <p>
-        I help nonprofits put this in place &mdash; from a single working session to a
-        hosted version running on infrastructure you own, with your documents loaded and
-        your team shown how to keep it current.
+        I help nonprofits put this in place &mdash; from a single working session to a hosted
+        version running on infrastructure you own, with your documents loaded and your team
+        shown how to keep it current.
       </p>
       <div class="cta-bar">
         <a class="cta-button" href="index.html#contact">Get in touch &rarr;</a>
