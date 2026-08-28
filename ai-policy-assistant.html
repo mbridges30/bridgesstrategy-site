@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Policy Assistant | Bridges Strategy</title>
+  <meta name="description" content="Turn your AI policy into something staff can ask questions of. Try a live demo, then build your own in about fifteen minutes with the prompts and setup steps here.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://bridgesstrategy.com/ai-policy-assistant.html">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bridgesstrategy.com/ai-policy-assistant.html">
+  <meta property="og:title" content="AI Policy Assistant | Bridges Strategy">
+  <meta property="og:description" content="Turn your AI policy into something staff can ask questions of. Try the demo, then build your own with the prompts and setup steps here.">
+  <meta property="og:image" content="https://bridgesstrategy.com/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <style>
+    /* ---- Page-specific: demo exchange ---- */
+    .demo-exchange {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+
+    .demo-bar {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid #eee;
+      font-size: 0.8rem;
+      color: #666;
+      background: #fbfbfb;
+    }
+
+    .demo-body {
+      padding: 1.1rem 1.1rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+    }
+
+    .demo-q {
+      align-self: flex-end;
+      max-width: 88%;
+      background: var(--accent-light);
+      padding: 0.55rem 0.85rem;
+      border-radius: 12px 12px 3px 12px;
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .demo-a {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-width: 92%;
+    }
+
+    .demo-a p { margin: 0; font-size: 0.92rem; line-height: 1.6; }
+
+    .verdict {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 0.15rem 0.6rem 0.2rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+    .verdict-green { background: #e6f2ea; color: #1b6b3a; }
+    .verdict-amber { background: #fbf1dc; color: #8a5b00; }
+    .verdict-red   { background: #f9e8e8; color: #a02128; }
+
+    .demo-cite {
+      font-size: 0.8rem;
+      color: #666;
+      font-style: italic;
+    }
+
+    .demo-escalate {
+      font-size: 0.85rem;
+      background: #fbf1dc;
+      border-left: 3px solid #b8873a;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0 4px 4px 0;
+      color: #4a3a17;
+    }
+
+    /* ---- Page-specific: prompt blocks ---- */
+    .prompt-block {
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      background: #fff;
+      overflow: hidden;
+      margin: 1.25rem 0;
+    }
+
+    .prompt-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.5rem 0.55rem 0.5rem 0.9rem;
+      border-bottom: 1px solid #eee;
+      background: #fbfbfb;
+    }
+
+    .prompt-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #666;
+      font-weight: 600;
+    }
+
+    .prompt-copy {
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-hover);
+      background: transparent;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 0.3rem 0.7rem;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .prompt-copy:hover { background: var(--accent-light); border-color: var(--accent); }
+    .prompt-copy[data-copied="1"] { color: #1b6b3a; border-color: #1b6b3a; }
+
+    .prompt-block pre {
+      margin: 0;
+      padding: 0.95rem 0.9rem;
+      background: #f6f7f7;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: #111;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .fill { color: var(--accent-hover); font-weight: 600; }
+
+    /* ---- Page-specific: numbered setup steps ---- */
+    ol.setup-steps {
+      list-style: none;
+      counter-reset: setupstep;
+      padding-left: 0;
+      margin: 1rem 0 0;
+    }
+
+    ol.setup-steps > li {
+      counter-increment: setupstep;
+      position: relative;
+      padding-left: 2.2rem;
+      margin-bottom: 0.7rem;
+    }
+
+    ol.setup-steps > li::before {
+      content: counter(setupstep);
+      position: absolute;
+      left: 0;
+      top: 0.15rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: var(--accent-light);
+      color: var(--accent-hover);
+      border-radius: 50%;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ---- Page-specific: comparison table ---- */
+    .table-scroll { overflow-x: auto; margin: 1rem 0; }
+
+    table.setup-table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 460px;
+      font-size: 0.9rem;
+    }
+
+    table.setup-table th,
+    table.setup-table td {
+      text-align: left;
+      padding: 0.6rem 0.7rem;
+      border-bottom: 1px solid #eee;
+      vertical-align: top;
+    }
+
+    table.setup-table th {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #666;
+      font-weight: 600;
+    }
+
+    table.setup-table td:first-child { font-weight: 600; white-space: nowrap; }
+
+    /* ---- Page-specific: try-list ---- */
+    .try-list { margin: 0.75rem 0 1.25rem; }
+    .try-list li { font-size: 0.95rem; }
+
+    .note-box {
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      padding: 0.8rem 1rem;
+      border-radius: 0 4px 4px 0;
+      font-size: 0.93rem;
+      margin: 1.25rem 0;
+    }
+    .note-box p:last-child { margin-bottom: 0; }
+
+    .caution-box {
+      background: #fbf1dc;
+      border-left: 3px solid #b8873a;
+      padding: 0.8rem 1rem;
+      border-radius: 0 4px 4px 0;
+      font-size: 0.93rem;
+      margin: 1.25rem 0;
+      color: #4a3a17;
+    }
+    .caution-box p:last-child { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="/" class="nav-brand">
+      <img src="assets/logo-full.svg" alt="Bridges Strategy" />
+    </a>
+    <div class="nav-links">
+      <a href="index.html#how-i-help">How I help</a>
+      <a href="tools.html" class="active">Tools</a>
+      <a href="/writing/">Writing</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header>
+    <h1>Your AI policy, made answerable</h1>
+    <p class="lead">
+      Staff ask a plain-language question and get a Green, Yellow or Red answer drawn
+      only from your organisation's own policy &mdash; and you get a record of what
+      people are asking.
+    </p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>A policy nobody reads is a policy nobody follows</h2>
+      <p>
+        Most AI policies end up as a PDF in a shared drive. Staff hit a question
+        mid-task &mdash; <em>can I put this in Copilot?</em> &mdash; and either guess,
+        or email someone and wait two days.
+      </p>
+      <p>
+        This sits between those two outcomes. It answers in seconds, strictly from your
+        documents, and hands off to a named person the moment it isn't certain.
+      </p>
+    </section>
+
+    <section>
+      <h2>See it working</h2>
+      <p>
+        The demo runs on a fictional nonprofit &mdash; Riverside Community Trust &mdash;
+        with a complete AI policy and an approved tools list behind it.
+      </p>
+
+      <div class="demo-exchange">
+        <div class="demo-bar">Riverside Community Trust &middot; AI Policy Assistant</div>
+        <div class="demo-body">
+
+          <div class="demo-q">Can I use Copilot to help me draft our monthly newsletter?</div>
+          <div class="demo-a">
+            <span class="verdict verdict-green">Green</span>
+            <p>
+              Yes. Drafting a newsletter is writing assistance, which is an approved use,
+              and Copilot is the Trust's primary approved tool. Newsletters are published
+              material, so this is fine &mdash; just make sure a person reviews the draft
+              before it goes out.
+            </p>
+            <p class="demo-cite">Per: AI Use Policy &middot; Approved AI Tools List</p>
+          </div>
+
+          <div class="demo-q">I want to use an AI notetaker in supervision meetings. Is that OK?</div>
+          <div class="demo-a">
+            <span class="verdict verdict-red">Red</span>
+            <p>
+              AI meeting transcription is approved for internal meetings only, but
+              explicitly not for supervision or one-to-one meetings. Supervision often
+              touches on personnel matters, which is why it's excluded.
+            </p>
+            <p class="demo-cite">Per: Approved AI Tools List</p>
+            <p class="demo-escalate">
+              Please contact Alex Rivera, Operations Director, before proceeding.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <p>
+        The second answer is the one worth noticing. That rule sits in the approved tools
+        list rather than the policy itself &mdash; the assistant finds it, says which
+        document it came from, and stops rather than guessing.
+      </p>
+
+      <p><strong>Try asking it:</strong></p>
+      <ul class="try-list">
+        <li>&ldquo;Can I paste a client's case notes into ChatGPT to summarise them?&rdquo;</li>
+        <li>&ldquo;Can I use AI to help score job applications?&rdquo;</li>
+        <li>&ldquo;Can I use AI to translate our housing leaflet into Polish?&rdquo;</li>
+      </ul>
+
+      <div class="cta-bar">
+        <a class="cta-button" href="https://aipolicy.bridgesstrategy.com/demo/" target="_blank" rel="noopener noreferrer">Try the demo &rarr;</a>
+      </div>
+    </section>
+
+    <section>
+      <h2>What makes it trustworthy</h2>
+
+      <h3>It only knows your documents</h3>
+      <p>
+        No general knowledge about AI, no advice from the internet, no filling gaps with
+        something plausible. If your policy doesn't cover it, it says so.
+      </p>
+
+      <h3>A verdict, not an essay</h3>
+      <p>
+        Green, Yellow or Red, then two sentences of plain English and the document it came
+        from. Readable on a phone between meetings.
+      </p>
+
+      <h3>It knows when to stop</h3>
+      <p>
+        Anything ambiguous, prohibited or beyond the documents ends with a named person to
+        contact. It removes hesitation; it doesn't replace judgement.
+      </p>
+
+      <h3>It keeps a record</h3>
+      <p>
+        Every question is logged. Reviewed monthly, that log is a live map of where your
+        policy is unclear &mdash; written by the people who actually have to follow it.
+      </p>
+    </section>
+
+    <section>
+      <h2>Build it yourself</h2>
+      <p>
+        You don't need a developer, and for most organisations you don't need me either.
+        Two versions below. Before you start, you need your AI policy as text you can copy,
+        and a named person willing to be the contact for anything unclear.
+      </p>
+
+      <div class="note-box">
+        <p>
+          If you have supporting documents &mdash; an approved tools list, a data
+          classification guide &mdash; gather those too. They make the answers noticeably
+          better, because most real questions turn on the detail in them rather than on the
+          policy itself.
+        </p>
+      </div>
+
+      <h3>Option 1 &mdash; the straightforward one</h3>
+      <p>
+        An assistant your staff can ask, that hands off to a person when it isn't sure.
+        No log, no admin side. About fifteen minutes.
+      </p>
+
+      <ol class="setup-steps">
+        <li>Open the AI tool your organisation already uses and create a new custom assistant &mdash; a <strong>Custom GPT</strong> in ChatGPT, a <strong>Project</strong> in Claude, a <strong>Gem</strong> in Gemini, or an <strong>agent</strong> in Copilot.</li>
+        <li>Copy the prompt below into its instructions.</li>
+        <li>Replace the highlighted placeholders with your organisation's name, your policy owner, and their email.</li>
+        <li>Paste your full policy text where the prompt says to.</li>
+        <li>Save it, then share the link &mdash; in Teams, on your intranet, or in an email signature.</li>
+      </ol>
+
+      <div class="prompt-block">
+        <div class="prompt-head">
+          <span class="prompt-label">Prompt &mdash; Option 1</span>
+          <button class="prompt-copy" type="button" data-target="prompt-1">Copy</button>
+        </div>
+        <pre id="prompt-1">You are the AI Policy Assistant for <span class="fill">[ORGANISATION]</span>.
+
+Answer only from the policy below. Never use outside knowledge about AI
+tools, vendors, or best practice — if it is not in the policy, you do not
+know it.
+
+Reply in this format every time:
+
+**[GREEN / YELLOW / RED]**
+Two or three sentences, plain language, explaining why.
+*Source: [section or heading you relied on]*
+
+GREEN  = clearly allowed
+RED    = clearly prohibited
+YELLOW = ambiguous, not addressed, or depends on specifics
+
+If the policy does not clearly cover the question, say so and answer
+YELLOW. Never fill a gap with general knowledge or a reasonable guess.
+
+End every YELLOW or RED answer with:
+"Please check with <span class="fill">[NAME]</span> at <span class="fill">[EMAIL]</span> before proceeding."
+
+Do not ask for or repeat real names, client records, donor details, or
+other personal information. If a question contains them, answer the
+general question and remind the person to leave personal details out.
+
+--- POLICY BEGINS ---
+<span class="fill">[PASTE THE FULL POLICY TEXT HERE]</span>
+--- POLICY ENDS ---</pre>
+      </div>
+
+      <div class="caution-box">
+        <p>
+          <strong>Paste the policy into the instructions rather than attaching it as a
+          file.</strong> Attached files get searched in fragments, so the assistant
+          sometimes misses a relevant clause. Pasted text is always fully in view. For
+          policies under about twenty pages this makes a real difference to accuracy.
+        </p>
+      </div>
+
+      <h3>Option 2 &mdash; with a question log</h3>
+      <p>
+        Everything above, plus a record of what people are asking. This is the version
+        worth building, because the log is what tells you where your policy is unclear.
+      </p>
+      <p>
+        The assistant can't email anyone or keep records itself &mdash; each conversation
+        is private to the person having it. So the logging is done by a form you already
+        have the tools to build.
+      </p>
+
+      <div class="table-scroll">
+        <table class="setup-table">
+          <thead>
+            <tr>
+              <th>If you use</th>
+              <th>Build the form in</th>
+              <th>For the email alert</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Microsoft 365</td>
+              <td>Microsoft Forms &mdash; responses collect in Excel automatically</td>
+              <td>A Power Automate flow: when a new response is submitted, send an email</td>
+            </tr>
+            <tr>
+              <td>Google Workspace</td>
+              <td>Google Forms &mdash; link responses to a Sheet</td>
+              <td>In the Sheet: Tools &rarr; Notification settings &rarr; notify on form submit</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Four fields is plenty: what you wanted to know, what the assistant said, your name and email (optional &mdash; leaving it optional gets you more honest questions), and whether it's urgent.</p>
+
+      <p>Then set up the assistant exactly as in Option 1, using this prompt instead:</p>
+
+      <div class="prompt-block">
+        <div class="prompt-head">
+          <span class="prompt-label">Prompt &mdash; Option 2</span>
+          <button class="prompt-copy" type="button" data-target="prompt-2">Copy</button>
+        </div>
+        <pre id="prompt-2">You are the AI Policy Assistant for <span class="fill">[ORGANISATION]</span>.
+
+SOURCES, in order of authority:
+1. AI Use Policy — this governs. If anything below conflicts with it, it wins.
+2. <span class="fill">[Approved Tools List / Data Guide / other supporting documents]</span>
+
+Answer only from these documents. Never use outside knowledge about AI
+tools, vendors, or best practice — if it is not written here, you do not
+know it. If a supporting document contradicts the policy, follow the
+policy and say you noticed the conflict.
+
+Reply in this format every time:
+
+**[GREEN / YELLOW / RED]** · Confidence: [High / Low]
+Two or three sentences, plain language.
+*Source: [which document, and which section]*
+
+GREEN  = clearly allowed
+RED    = clearly prohibited
+YELLOW = ambiguous, not addressed, or depends on specifics
+
+Use Low confidence whenever you had to infer, extrapolate, or read between
+the lines — not only when the documents are silent.
+
+For any YELLOW, RED, or Low-confidence answer, add:
+
+"This one isn't clear-cut. Please log it here so <span class="fill">[NAME]</span> can give you a
+definitive answer: <span class="fill">[FORM LINK]</span>"
+
+Then write a two-sentence summary of the question they can paste straight
+into the form.
+
+Do not ask for or repeat real names, client records, donor details, or
+other personal information. If a question contains them, answer the
+general question and remind the person to leave personal details out.
+
+--- DOCUMENTS BEGIN ---
+<span class="fill">[PASTE POLICY AND SUPPORTING DOCUMENTS HERE, EACH CLEARLY LABELLED]</span>
+--- DOCUMENTS END ---</pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>Using the log &mdash; the part most people skip</h2>
+      <p>
+        The answers help one person for one minute. The log is what improves the policy,
+        and it's worth putting a recurring half hour in the diary for it.
+      </p>
+
+      <ol class="setup-steps">
+        <li><strong>Read the month's questions in one sitting.</strong> Themes are obvious in a batch and invisible one at a time.</li>
+        <li><strong>Look for repeats.</strong> The same question asked three times is a gap in the policy, not three confused people.</li>
+        <li><strong>Edit the document, not the assistant.</strong> Add the missing clause to your policy and the assistant improves immediately &mdash; and stays auditable, because every answer still traces back to an approved document.</li>
+        <li><strong>Tell people what changed.</strong> Staff who see their question turn into policy ask more questions. That's the flywheel.</li>
+      </ol>
+
+      <div class="caution-box">
+        <p>
+          <strong>Don't let the assistant learn from its own answers.</strong> It's
+          tempting, but a policy tool has to be auditable &mdash; you need to be able to
+          say why it gave an answer and point at the clause. Keep the humans in the loop
+          and the documents as the single source of truth.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>What the DIY version can't do</h2>
+      <ul>
+        <li><strong>The log is opt-in.</strong> You'll see what people bother to submit &mdash; expect around half. Still enough to spot themes.</li>
+        <li><strong>Everyone needs a seat.</strong> A shared assistant requires paid accounts. Staff without one can paste the whole prompt into any free AI tool instead.</li>
+        <li><strong>Format isn't guaranteed.</strong> A prompt asks for consistency; purpose-built software enforces it. Expect the occasional answer that drifts.</li>
+        <li><strong>No central admin view.</strong> Your spreadsheet is the dashboard.</li>
+      </ul>
+      <p>
+        For most organisations that's a fair trade, and either version beats the policy
+        nobody opens. When those limits start to bite &mdash; usually when you want to see
+        everything being asked rather than only what gets reported &mdash; that's the point
+        where a purpose-built version earns its keep.
+      </p>
+    </section>
+
+    <section>
+      <h2>Or we can do it together</h2>
+      <p>
+        I help nonprofits put this in place &mdash; from a single working session to a
+        hosted version running on infrastructure you own, with your documents loaded and
+        your team shown how to keep it current.
+      </p>
+      <div class="cta-bar">
+        <a class="cta-button" href="index.html#contact">Get in touch &rarr;</a>
+        <a class="cta-button cta-button--secondary" href="ai-policy-builder.html">Need a policy first? &rarr;</a>
+      </div>
+    </section>
+
+    <section id="subscribe">
+      <h2>Stay current on AI in the nonprofit sector</h2>
+      <p>A weekly digest of curated news and use cases for nonprofit leaders. Sent every Monday.</p>
+      <form class="subscribe-form">
+        <input type="email" aria-label="Email address" placeholder="your@email.com" required autocomplete="email" />
+        <button type="submit">Subscribe</button>
+      </form>
+      <p class="subscribe-note" role="status" aria-live="polite" style="display:none;"></p>
+      <p class="subscribe-note">No spam. Unsubscribe anytime. We do not share subscriber data.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Bridges Strategy &middot; <a href="https://www.linkedin.com/in/mbridges30" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+  </footer>
+
+  <script>
+  /* Copy buttons for the prompt blocks.
+     Uses textContent, not innerText, so the copied text matches the source
+     exactly and is not affected by how pre-wrap breaks lines on screen. */
+  document.querySelectorAll('.prompt-copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var pre = document.getElementById(btn.dataset.target);
+      if (!pre) return;
+      var text = pre.textContent;
+
+      var confirmCopied = function () {
+        btn.textContent = 'Copied';
+        btn.dataset.copied = '1';
+        setTimeout(function () {
+          btn.textContent = 'Copy';
+          delete btn.dataset.copied;
+        }, 2000);
+      };
+
+      var fallbackCopy = function () {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); confirmCopied(); } catch (e) { /* no clipboard */ }
+        document.body.removeChild(ta);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(confirmCopied, fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
+    });
+  });
+
+  document.querySelectorAll('.subscribe-form').forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var input = form.querySelector('input[type="email"]');
+      var btn = form.querySelector('button');
+      var msg = form.nextElementSibling;
+      btn.disabled = true;
+      btn.textContent = '...';
+      fetch('https://radar.bridgesstrategy.com/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: input.value.trim() })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (msg) { msg.textContent = data.message || data.error; msg.style.display = 'block'; }
+        if (data.message) { input.value = ''; msg.style.color = '#3d7a85'; }
+        else { msg.style.color = '#e53e3e'; }
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+      })
+      .catch(function() {
+        if (msg) { msg.textContent = 'Something went wrong.'; msg.style.display = 'block'; msg.style.color = '#e53e3e'; }
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+      });
+    });
+  });
+  </script>
+
+</body>
+</html>
