@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>AI Policy Assistant | Bridges Strategy</title>
-  <meta name="description" content="Turn your AI policy into something staff can ask questions of. Try a live demo, then build your own in about fifteen minutes with the prompts and setup steps here.">
+  <meta name="description" content="Turn your AI policy into something staff can ask questions of. Try a live demo, then build a free version yourself in fifteen minutes — or a hosted one with an anonymous question log.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://bridgesstrategy.com/ai-policy-assistant.html">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -13,7 +13,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://bridgesstrategy.com/ai-policy-assistant.html">
   <meta property="og:title" content="AI Policy Assistant | Bridges Strategy">
-  <meta property="og:description" content="Turn your AI policy into something staff can ask questions of. Try the demo, then build your own with the prompts and setup steps here.">
+  <meta property="og:description" content="Turn your AI policy into something staff can ask questions of. Try the demo, then build a free version yourself — or a hosted one with an anonymous question log.">
   <meta property="og:image" content="https://bridgesstrategy.com/assets/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -328,7 +328,44 @@
 
       <div class="cta-bar">
         <a class="cta-button" href="https://aipolicy.bridgesstrategy.com/demo/" target="_blank" rel="noopener noreferrer">Try the demo &rarr;</a>
+        <a class="cta-button cta-button--secondary" href="sample-ai-policy.html">Read the policy it uses &rarr;</a>
       </div>
+
+      <p>
+        Reading the <a href="sample-ai-policy.html">source policy</a> alongside the answers is
+        worth a few minutes. Every verdict traces back to a clause you can find, which is the
+        whole basis for trusting it &mdash; and it makes obvious how much the quality of the
+        answers depends on the quality of the policy.
+      </p>
+    </section>
+
+    <section>
+      <h2>The admin side</h2>
+      <p>
+        The half nobody sees in a demo, and the half that makes it worth building. Whoever
+        owns the policy gets a dashboard: every question asked, filterable by Green, Yellow
+        or Red and by date, with the documents editable in the browser.
+      </p>
+      <p>
+        You can log into the demo's dashboard and look around. It is a view-only account, so
+        the documents and the log are read-only &mdash; everything else works exactly as it
+        does for a real administrator.
+      </p>
+
+      <div class="note-box">
+        <p>
+          <strong>Demo dashboard</strong><br>
+          <a href="https://aipolicy.bridgesstrategy.com/demo/admin/login" target="_blank" rel="noopener noreferrer">aipolicy.bridgesstrategy.com/demo/admin/login</a><br>
+          Email: <code>viewer@bridgesstrategy.com</code><br>
+          Password: <code>SeeTheDashboard</code>
+        </p>
+      </div>
+
+      <p>
+        The question log fills up with whatever visitors to this page have asked, which makes
+        it a reasonable illustration of the real thing: a pile of unfiltered questions, some
+        of them revealing. That is what the policy owner reads once a month.
+      </p>
     </section>
 
     <section>
@@ -360,26 +397,64 @@
     </section>
 
     <section>
-      <h2>Build it yourself</h2>
+      <h2>Two ways to do this</h2>
       <p>
-        You don't need a developer, and for most organisations you don't need me either.
-        Two versions below. Before you start, you need your AI policy as text you can copy,
-        and a named person willing to be the contact for anything unclear.
+        One you can put together this afternoon with no help from anyone. One that is a
+        proper application, hosted at your own web address &mdash; which is what the demo
+        above actually is.
       </p>
 
-      <div class="note-box">
-        <p>
-          If you have supporting documents &mdash; an approved tools list, a data
-          classification guide &mdash; gather those too. They make the answers noticeably
-          better, because most real questions turn on the detail in them rather than on the
-          policy itself.
-        </p>
+      <div class="table-scroll">
+        <table class="setup-table">
+          <thead>
+            <tr>
+              <th>&nbsp;</th>
+              <th>Build it yourself</th>
+              <th>Purpose-built</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Setup</td>
+              <td>About fifteen minutes</td>
+              <td>About a day</td>
+            </tr>
+            <tr>
+              <td>Cost</td>
+              <td>Free, using seats you already pay for</td>
+              <td>Around $10 a month, all in</td>
+            </tr>
+            <tr>
+              <td>Staff access</td>
+              <td>Anyone with a paid AI account</td>
+              <td>Anyone with the link &mdash; no login at all</td>
+            </tr>
+            <tr>
+              <td>Question log</td>
+              <td>None</td>
+              <td>Every question, automatically and anonymously</td>
+            </tr>
+            <tr>
+              <td>Documents</td>
+              <td>Pasted into the assistant's instructions</td>
+              <td>Managed in a browser by whoever owns the policy</td>
+            </tr>
+            <tr>
+              <td>Lives</td>
+              <td>Inside your AI tool</td>
+              <td>At your own web address</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+    </section>
 
-      <h3>Option 1 &mdash; the straightforward one</h3>
+    <section>
+      <h2>Option 1 &mdash; build it yourself</h2>
       <p>
-        An assistant your staff can ask, that hands off to a person when it isn't sure.
-        No log, no admin side. About fifteen minutes.
+        An assistant your staff can ask, that hands off to a named person when it isn't
+        sure. No log, no admin side, no developer. You need your AI policy as text you can
+        copy, and someone willing to be the contact for anything unclear.
       </p>
 
       <ol class="setup-steps">
@@ -435,97 +510,69 @@ general question and remind the person to leave personal details out.
         </p>
       </div>
 
-      <h3>Option 2 &mdash; with a question log</h3>
+      <div class="note-box">
+        <p>
+          <strong>Got more than one document?</strong> Most real questions turn on the
+          detail in an approved tools list or a data guide rather than the policy itself.
+          Paste those in too, and add this line above them so the assistant knows which one
+          wins: <em>&ldquo;These sources are listed in order of authority. The AI Use Policy
+          governs &mdash; if a supporting document conflicts with it, follow the policy and
+          say you noticed the conflict.&rdquo;</em>
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Option 2 &mdash; a purpose-built assistant</h2>
       <p>
-        Everything above, plus a record of what people are asking. This is the version
-        worth building, because the log is what tells you where your policy is unclear.
+        A small web application that lives at your own address &mdash;
+        <em>aipolicy.yourorganisation.org</em> &mdash; and does the job properly. This is
+        what you tried at the top of this page.
+      </p>
+
+      <h3>Nobody has to log in</h3>
+      <p>
+        Staff click a link and ask. No account, no seat, no password. That matters more
+        than it sounds: in most nonprofits only some people have a paid AI licence, and the
+        ones most likely to have a policy question are often the ones without one.
+      </p>
+
+      <h3>Every question is logged, anonymously</h3>
+      <p>
+        Nothing to fill in, nothing to remember. The question and the answer are recorded
+        automatically, with no name attached to either. Anonymity isn't an oversight &mdash;
+        it's the point. People ask the awkward question when it can't be traced back to
+        them, and the awkward questions are the ones you most need to see.
+      </p>
+
+      <h3>An admin dashboard for whoever owns the policy</h3>
+      <p>
+        They log in and see every question asked, filterable by Green, Yellow or Red and by
+        date. They can add, edit and retire documents in the browser &mdash; no redeploying
+        anything &mdash; and update the named contact staff are pointed at. Change the
+        policy in the morning and the answers change immediately.
+      </p>
+
+      <h3>What it takes</h3>
+      <p>
+        Around $10 a month for hosting and AI usage combined, an account with an AI
+        provider, and about a day to set up. It runs on infrastructure you own and pay for,
+        so it stays yours &mdash; and if you ever want to move it, everything exports as a
+        single file.
       </p>
       <p>
-        The assistant can't email anyone or keep records itself &mdash; each conversation
-        is private to the person having it. So the logging is done by a form you already
-        have the tools to build.
+        I can build it with you or for you. If you have someone technical in-house, it is a
+        genuinely small application &mdash; the version behind the demo on this page was
+        built in an afternoon with an AI coding tool, which is rather the point.
       </p>
-
-      <div class="table-scroll">
-        <table class="setup-table">
-          <thead>
-            <tr>
-              <th>If you use</th>
-              <th>Build the form in</th>
-              <th>For the email alert</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Microsoft 365</td>
-              <td>Microsoft Forms &mdash; responses collect in Excel automatically</td>
-              <td>A Power Automate flow: when a new response is submitted, send an email</td>
-            </tr>
-            <tr>
-              <td>Google Workspace</td>
-              <td>Google Forms &mdash; link responses to a Sheet</td>
-              <td>In the Sheet: Tools &rarr; Notification settings &rarr; notify on form submit</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p>Four fields is plenty: what you wanted to know, what the assistant said, your name and email (optional &mdash; leaving it optional gets you more honest questions), and whether it's urgent.</p>
-
-      <p>Then set up the assistant exactly as in Option 1, using this prompt instead:</p>
-
-      <div class="prompt-block">
-        <div class="prompt-head">
-          <span class="prompt-label">Prompt &mdash; Option 2</span>
-          <button class="prompt-copy" type="button" data-target="prompt-2">Copy</button>
-        </div>
-        <pre id="prompt-2">You are the AI Policy Assistant for <span class="fill">[ORGANISATION]</span>.
-
-SOURCES, in order of authority:
-1. AI Use Policy — this governs. If anything below conflicts with it, it wins.
-2. <span class="fill">[Approved Tools List / Data Guide / other supporting documents]</span>
-
-Answer only from these documents. Never use outside knowledge about AI
-tools, vendors, or best practice — if it is not written here, you do not
-know it. If a supporting document contradicts the policy, follow the
-policy and say you noticed the conflict.
-
-Reply in this format every time:
-
-**[GREEN / YELLOW / RED]** · Confidence: [High / Low]
-Two or three sentences, plain language.
-*Source: [which document, and which section]*
-
-GREEN  = clearly allowed
-RED    = clearly prohibited
-YELLOW = ambiguous, not addressed, or depends on specifics
-
-Use Low confidence whenever you had to infer, extrapolate, or read between
-the lines — not only when the documents are silent.
-
-For any YELLOW, RED, or Low-confidence answer, add:
-
-"This one isn't clear-cut. Please log it here so <span class="fill">[NAME]</span> can give you a
-definitive answer: <span class="fill">[FORM LINK]</span>"
-
-Then write a two-sentence summary of the question they can paste straight
-into the form.
-
-Do not ask for or repeat real names, client records, donor details, or
-other personal information. If a question contains them, answer the
-general question and remind the person to leave personal details out.
-
---- DOCUMENTS BEGIN ---
-<span class="fill">[PASTE POLICY AND SUPPORTING DOCUMENTS HERE, EACH CLEARLY LABELLED]</span>
---- DOCUMENTS END ---</pre>
-      </div>
     </section>
 
     <section>
       <h2>Using the log &mdash; the part most people skip</h2>
       <p>
         The answers help one person for one minute. The log is what improves the policy,
-        and it's worth putting a recurring half hour in the diary for it.
+        and it's worth putting a recurring half hour in the diary for it. This applies
+        whether you're reading a dashboard or a handful of forwarded emails.
       </p>
 
       <ol class="setup-steps">
@@ -546,18 +593,24 @@ general question and remind the person to leave personal details out.
     </section>
 
     <section>
-      <h2>What the DIY version can't do</h2>
-      <ul>
-        <li><strong>The log is opt-in.</strong> You'll see what people bother to submit &mdash; expect around half. Still enough to spot themes.</li>
-        <li><strong>Everyone needs a seat.</strong> A shared assistant requires paid accounts. Staff without one can paste the whole prompt into any free AI tool instead.</li>
-        <li><strong>Format isn't guaranteed.</strong> A prompt asks for consistency; purpose-built software enforces it. Expect the occasional answer that drifts.</li>
-        <li><strong>No central admin view.</strong> Your spreadsheet is the dashboard.</li>
-      </ul>
+      <h2>Which one you need</h2>
       <p>
-        For most organisations that's a fair trade, and either version beats the policy
-        nobody opens. When those limits start to bite &mdash; usually when you want to see
-        everything being asked rather than only what gets reported &mdash; that's the point
-        where a purpose-built version earns its keep.
+        <strong>Start with Option 1.</strong> It costs nothing, it takes an afternoon, and a
+        policy your staff can actually ask questions of beats a better plan you haven't
+        built. You'll also learn what people ask, which is worth knowing before you spend
+        anything.
+      </p>
+      <p>
+        Three things tend to push organisations to Option 2. You want to see
+        <em>everything</em> being asked rather than only what reaches you. Staff without a
+        paid AI licence need it too. Or the person who owns the policy wants to manage the
+        documents themselves, without going back to whoever set the assistant up.
+      </p>
+      <p>
+        Be aware of one limit either way: a prompt asks an AI tool for consistency, where an
+        application enforces it. Expect the DIY version to drift from its format
+        occasionally. It's a fair trade at zero cost, and it's the main thing you're buying
+        out of when you move up.
       </p>
     </section>
 
