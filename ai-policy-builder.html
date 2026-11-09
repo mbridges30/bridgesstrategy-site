@@ -51,16 +51,19 @@
       font-weight: 600;
       font-size: 1rem;
     }
-    .site-nav .nav-brand img { height: 36px; width: auto; }
+    .site-nav .nav-brand img { height: 44px; width: auto; }
     .site-nav .nav-links { display: flex; gap: 1.5rem; }
     .site-nav a { font-size: 0.95rem; color: #555; text-decoration: none; }
     .site-nav a:hover { color: var(--accent); }
     .site-nav a.active { color: var(--accent); font-weight: 600; }
 
-    @media (max-width: 640px) {
+    @media (max-width: 760px) {
       .site-nav { flex-direction: column; align-items: flex-start; gap: 0.6rem; padding: 0.75rem 1.25rem; }
       .site-nav .nav-links { gap: 1rem; flex-wrap: wrap; }
       .site-nav .nav-links a { font-size: 0.85rem; }
+    }
+    @media (max-width: 640px) {
+      .site-nav .nav-brand img { height: 36px; }
     }
 
     header, main, footer {
@@ -320,7 +323,7 @@
 
 <nav class="site-nav">
   <a href="/" class="nav-brand">
-    <img src="assets/logo-full.svg" alt="Bridges Strategy" />
+    <img src="assets/logo-primary.png" alt="Bridges Strategy" width="328" height="44" />
   </a>
   <div class="nav-links">
     <a href="index.html#how-i-help">How I help</a>
