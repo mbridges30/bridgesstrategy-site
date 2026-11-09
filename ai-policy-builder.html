@@ -6,7 +6,9 @@
   <meta name="description" content="A free tool that guides nonprofits through a short discovery process and generates a complete, board-ready AI Acceptable Use and Governance Policy.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://bridgesstrategy.com/ai-policy-builder.html">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://bridgesstrategy.com/ai-policy-builder.html">
   <meta property="og:title" content="Nonprofit AI Policy Builder | Bridges Strategy">
@@ -17,18 +19,21 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --accent: #4f8f9b;
-      --accent-light: #e8f1f3;
-      --accent-hover: #3d7a85;
+      --navy: #143440;
+      --ivory: #F6F3EA;
+      --teal: #5B9799;            /* muted teal: decorative only, fails contrast as text */
+      --accent: #2B676D;          /* deep teal: links, text accents, buttons (6.4:1 on white) */
+      --accent-hover: #143440;    /* navy: hover / pressed */
+      --accent-light: #E5F0EC;
     }
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       font-size: 17px;
       line-height: 1.7;
-      color: #111;
-      background: #f9fafa;
-      border-top: 3px solid var(--accent);
+      color: #143440;
+      background: #F6F3EA;
+      border-top: 3px solid var(--teal);
     }
 
     /* Nav */
@@ -39,7 +44,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid #e0e0e0;
+      border-bottom: 1px solid #E3E7E8;
       background: #fff;
     }
     .site-nav .nav-brand {
@@ -53,7 +58,7 @@
     }
     .site-nav .nav-brand img { height: 44px; width: auto; }
     .site-nav .nav-links { display: flex; gap: 1.5rem; }
-    .site-nav a { font-size: 0.95rem; color: #555; text-decoration: none; }
+    .site-nav a { font-size: 0.95rem; color: var(--navy); text-decoration: none; }
     .site-nav a:hover { color: var(--accent); }
     .site-nav a.active { color: var(--accent); font-weight: 600; }
 
@@ -75,12 +80,12 @@
     header { padding-top: 2.5rem; padding-bottom: 1rem; }
 
     h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
-    h2 { font-size: 1.25rem; font-weight: 600; color: var(--accent); margin-bottom: 0.75rem; }
+    h2 { font-size: 1.25rem; font-weight: 600; color: var(--navy); margin-bottom: 0.75rem; }
     h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
     p { margin-bottom: 1rem; }
     a { color: var(--accent); }
 
-    .lead { font-size: 1.05rem; color: #444; margin-top: 0.5rem; }
+    .lead { font-size: 1.05rem; color: #143440; margin-top: 0.5rem; }
 
     /* Progress bar */
     .progress-wrap {
@@ -91,7 +96,7 @@
     .progress-step {
       flex: 1;
       height: 4px;
-      background: #ddd;
+      background: #CBD2D3;
       border-radius: 2px;
       transition: background 0.3s;
     }
@@ -100,7 +105,7 @@
 
     .step-label {
       font-size: 0.8rem;
-      color: #888;
+      color: #52636B;
       margin-bottom: 0.5rem;
       font-weight: 500;
       letter-spacing: 0.03em;
@@ -115,14 +120,14 @@
       padding: 1rem 1.25rem;
       margin-bottom: 1.5rem;
       font-size: 0.95rem;
-      color: #555;
+      color: #52636B;
     }
-    .notice-box strong { color: #111; }
+    .notice-box strong { color: #143440; }
 
     /* Question card */
     .question-card {
       background: #fff;
-      border: 1px solid #e0e0e0;
+      border: 1px solid #E3E7E8;
       border-radius: 8px;
       padding: 1.5rem;
       margin-bottom: 1.5rem;
@@ -131,12 +136,12 @@
       font-size: 1.1rem;
       font-weight: 600;
       margin-bottom: 1.25rem;
-      color: #111;
+      color: #143440;
       line-height: 1.5;
     }
     .question-sub {
       font-size: 0.9rem;
-      color: #777;
+      color: #52636B;
       font-weight: 400;
       margin-top: 0.25rem;
       display: block;
@@ -153,14 +158,14 @@
       align-items: flex-start;
       gap: 0.9rem;
       padding: 0.9rem 1.1rem;
-      border: 2px solid #e0e0e0;
+      border: 2px solid #E3E7E8;
       border-radius: 6px;
       background: #fff;
       cursor: pointer;
       text-align: left;
       font-size: 0.97rem;
       font-family: inherit;
-      color: #111;
+      color: #143440;
       transition: border-color 0.15s, background 0.15s;
       line-height: 1.5;
     }
@@ -173,10 +178,10 @@
       min-width: 26px;
       height: 26px;
       border-radius: 50%;
-      background: #eee;
+      background: #E3E7E8;
       font-size: 0.8rem;
       font-weight: 700;
-      color: #555;
+      color: #52636B;
       flex-shrink: 0;
       margin-top: 1px;
       transition: background 0.15s, color 0.15s;
@@ -198,22 +203,22 @@
       font-size: 0.97rem;
       padding: 0.6rem 0.75rem;
       background: #fff;
-      border: 1px solid #e0e0e0;
+      border: 1px solid #E3E7E8;
       border-radius: 6px;
     }
     .confirm-list .label {
-      color: #777;
+      color: #52636B;
       font-size: 0.85rem;
       min-width: 120px;
       flex-shrink: 0;
     }
-    .confirm-list .value { color: #111; font-weight: 500; }
+    .confirm-list .value { color: #143440; font-weight: 500; }
     .assumption-note {
       background: var(--accent-light);
       border-radius: 6px;
       padding: 0.9rem 1.1rem;
       font-size: 0.9rem;
-      color: #444;
+      color: #143440;
       margin-bottom: 1.5rem;
     }
 
@@ -277,27 +282,27 @@
     .copy-btn.copied { background: #27ae60; }
     .copy-notice {
       font-size: 0.88rem;
-      color: #666;
+      color: #52636B;
       padding: 0.5rem 0;
       align-self: center;
     }
     .policy-body {
       background: #fff;
-      border: 1px solid #ddd;
+      border: 1px solid #CBD2D3;
       border-radius: 8px;
       padding: 2rem;
       font-size: 0.93rem;
       line-height: 1.8;
       white-space: pre-wrap;
       font-family: "Georgia", serif;
-      color: #222;
+      color: #143440;
       max-height: 600px;
       overflow-y: auto;
     }
 
     .guardrails-prompt {
       background: #fff;
-      border: 1px solid #e0e0e0;
+      border: 1px solid #E3E7E8;
       border-radius: 8px;
       padding: 1.5rem;
       margin-top: 2rem;
@@ -305,13 +310,13 @@
 
     /* Footer */
     footer {
-      border-top: 1px solid #e0e0e0;
+      border-top: 1px solid #E3E7E8;
       font-size: 0.875rem;
-      color: #888;
+      color: #52636B;
       padding-top: 1.5rem;
       padding-bottom: 2rem;
     }
-    footer a { color: #888; }
+    footer a { color: #52636B; }
     footer a:hover { color: var(--accent); }
 
     /* Steps visibility */
@@ -350,7 +355,7 @@
     </div>
     <div class="question-card">
       <div class="question-text">This tool will ask you five short questions about your organization, then generate a complete AI Acceptable Use and Governance Policy. The whole process takes about three minutes.</div>
-      <p style="font-size:0.95rem; color:#555; margin-bottom:0;">No personal or identifying information is required. You can answer at a categorical level throughout.</p>
+      <p style="font-size:0.95rem; color:#52636B; margin-bottom:0;">No personal or identifying information is required. You can answer at a categorical level throughout.</p>
     </div>
     <div class="btn-row">
       <button class="btn-primary" onclick="goToStep(1)">Begin →</button>
@@ -426,7 +431,7 @@
   <div class="wizard-step" id="step-6">
     <div class="progress-wrap" id="progress-6"></div>
     <h2>Before we generate your policy</h2>
-    <p style="color:#555; margin-bottom:1.25rem;">Here's what we understood about your organization. Please confirm this is correct, or go back to make changes.</p>
+    <p style="color:#52636B; margin-bottom:1.25rem;">Here's what we understood about your organization. Please confirm this is correct, or go back to make changes.</p>
     <ul class="confirm-list" id="confirm-list"></ul>
     <div class="assumption-note" id="assumption-note"></div>
     <div class="btn-row">
@@ -438,7 +443,7 @@
   <!-- Step 7: Policy output -->
   <div class="wizard-step" id="step-7">
     <h2>Your AI Governance Policy</h2>
-    <p style="color:#555; margin-bottom:1.25rem;">Your policy draft is ready. Select all, copy, and paste it into a new Word or Google Doc — the formatting will convert cleanly in most editors.</p>
+    <p style="color:#52636B; margin-bottom:1.25rem;">Your policy draft is ready. Select all, copy, and paste it into a new Word or Google Doc — the formatting will convert cleanly in most editors.</p>
     <div class="policy-actions">
       <button class="copy-btn" id="copy-btn" onclick="copyPolicy()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
@@ -450,7 +455,7 @@
 
     <div class="guardrails-prompt" id="guardrails-prompt">
       <h3>Optional: Department-specific guardrails</h3>
-      <p style="font-size:0.95rem; color:#444; margin-bottom:1rem;">Would you like to add department-specific guardrails as an appendix to your policy? These cover fundraising, HR, communications, programs, and operations.</p>
+      <p style="font-size:0.95rem; color:#143440; margin-bottom:1rem;">Would you like to add department-specific guardrails as an appendix to your policy? These cover fundraising, HR, communications, programs, and operations.</p>
       <div class="btn-row" style="margin-top:0;">
         <button class="btn-primary" onclick="addGuardrails()">Yes, add guardrails</button>
         <button class="btn-secondary" onclick="document.getElementById('guardrails-prompt').style.display='none'">No thanks</button>
@@ -459,12 +464,12 @@
 
     <div style="margin-top:2rem; padding:1.25rem; background:var(--accent-light); border-radius:8px; font-size:0.95rem;">
       <strong>Suggested next steps:</strong>
-      <ul style="margin-top:0.6rem; margin-left:1.25rem; color:#444; line-height:2;">
+      <ul style="margin-top:0.6rem; margin-left:1.25rem; color:#143440; line-height:2;">
         <li>Share this draft with your leadership team or board for review</li>
         <li>Have legal counsel review sections covering data privacy or employment</li>
         <li>Set a calendar reminder to review the policy in 6–12 months</li>
       </ul>
-      <p style="margin-top:1rem; margin-bottom:0; color:#555;">This policy was built using the Bridges Strategy nonprofit AI governance framework. If you found this useful or want to go deeper, visit <a href="https://bridgesstrategy.com">bridgesstrategy.com</a> or reach out to <a href="mailto:mark@bridgesstrategy.com">mark@bridgesstrategy.com</a>.</p>
+      <p style="margin-top:1rem; margin-bottom:0; color:#52636B;">This policy was built using the Bridges Strategy nonprofit AI governance framework. If you found this useful or want to go deeper, visit <a href="https://bridgesstrategy.com">bridgesstrategy.com</a> or reach out to <a href="mailto:mark@bridgesstrategy.com">mark@bridgesstrategy.com</a>.</p>
     </div>
   </div>
 

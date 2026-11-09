@@ -6,7 +6,9 @@
   <meta name="description" content="Free AI tools for nonprofit leaders. No account required. No data collected.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://bridgesstrategy.com/tools.html">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="stylesheet" href="styles.css">
 
   <!-- Open Graph -->
@@ -121,7 +123,7 @@
       .then(function(r) { return r.json(); })
       .then(function(data) {
         if (msg) { msg.textContent = data.message || data.error; msg.style.display = 'block'; }
-        if (data.message) { input.value = ''; msg.style.color = '#3d7a85'; }
+        if (data.message) { input.value = ''; msg.style.color = '#2B676D'; }
         else { msg.style.color = '#e53e3e'; }
         btn.disabled = false;
         btn.textContent = 'Subscribe';

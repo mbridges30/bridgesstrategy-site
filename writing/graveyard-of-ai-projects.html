@@ -6,7 +6,9 @@
   <meta name="description" content="Every failed AI project taught something about where AI breaks down. The graveyard isn't the problem — giving up before you learn from it is.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://bridgesstrategy.com/writing/graveyard-of-ai-projects.html">
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="../assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="stylesheet" href="../styles.css">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://bridgesstrategy.com/writing/graveyard-of-ai-projects.html">
@@ -102,7 +104,7 @@
       .then(function(r) { return r.json(); })
       .then(function(data) {
         if (msg) { msg.textContent = data.message || data.error; msg.style.display = 'block'; }
-        if (data.message) { input.value = ''; msg.style.color = '#3d7a85'; }
+        if (data.message) { input.value = ''; msg.style.color = '#2B676D'; }
         else { msg.style.color = '#e53e3e'; }
         btn.disabled = false;
         btn.textContent = 'Subscribe';

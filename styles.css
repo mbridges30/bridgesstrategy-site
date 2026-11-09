@@ -10,16 +10,22 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 18px;
   line-height: 1.7;
-  color: #111;
-  background: #f9fafa;
+  color: var(--navy);
+  background: var(--ivory);
   border-top: 3px solid var(--accent);
 }
 
+/* Bridges Strategy brand kit v1.1 */
 :root {
-  --accent: #4f8f9b;        /* brand teal: large headings, borders, decorative */
-  --accent-light: #e8f1f3;
-  --accent-hover: #3d7a85;  /* 4.9:1 on white — minimum for text links & button fills */
-  --accent-dark: #33646e;   /* pressed/hover state for filled buttons */
+  --navy: #143440;          /* text, headings, navigation, dark surfaces (13:1 on white) */
+  --ivory: #F6F3EA;         /* page background */
+  --slate: #52636B;         /* secondary text and captions (6.3:1 on white) */
+  --accent: #5B9799;        /* muted teal: DECORATIVE ONLY (3.3:1 on white, never use for text) */
+  --accent-light: #E5F0EC;  /* pale teal: quote and highlight surfaces */
+  --accent-hover: #2B676D;  /* deep teal: text links, labels, button fills (6.4:1 on white) */
+  --accent-dark: #143440;   /* hover/pressed state for filled buttons */
+  --line: #E3E7E8;          /* hairline borders (navy tint) */
+  --line-strong: #CBD2D3;   /* form fields, scrollbars */
 }
 
 /* Nav */
@@ -30,7 +36,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--line);
   background: #fff;
 }
 
@@ -39,7 +45,7 @@ body {
   align-items: center;
   gap: 0.6rem;
   text-decoration: none;
-  color: var(--accent);
+  color: var(--navy);
   font-weight: 600;
   font-size: 1rem;
   letter-spacing: 0.01em;
@@ -59,7 +65,7 @@ body {
 
 .site-nav a {
   font-size: 0.95rem;
-  color: #555;
+  color: var(--navy);
   text-decoration: none;
 }
 
@@ -86,7 +92,7 @@ header {
 }
 
 header.hero {
-  background: linear-gradient(to bottom, var(--accent-light), #f9fafa);
+  background: linear-gradient(to bottom, var(--accent-light), var(--ivory));
   max-width: 100%;
   padding: 3rem 1.5rem 1.5rem;
 }
@@ -105,7 +111,7 @@ header.hero > * {
   border-left: 3px solid var(--accent);
   border-radius: 0 4px 4px 0;
   font-size: 0.95rem;
-  color: #444;
+  color: var(--navy);
   line-height: 1.5;
 }
 
@@ -117,7 +123,7 @@ h1 {
 
 .subtitle {
   font-size: 1.1rem;
-  color: #555;
+  color: var(--slate);
 }
 
 /* CTA bar */
@@ -145,7 +151,7 @@ h1 {
   background: var(--accent-dark);
   color: #fff;
   text-decoration: none;
-  box-shadow: 0 2px 8px rgba(79, 143, 155, 0.3);
+  box-shadow: 0 2px 8px rgba(20, 52, 64, 0.25);
 }
 
 /* Secondary / ghost button */
@@ -169,14 +175,14 @@ section {
 
 section + section {
   padding-top: 2rem;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--line);
 }
 
 h2 {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: var(--accent);
+  color: var(--navy);
 }
 
 /* Subsection headers */
@@ -185,7 +191,7 @@ h3 {
   font-weight: 600;
   margin-top: 1.75rem;
   margin-bottom: 0.25rem;
-  color: #111;
+  color: var(--navy);
 }
 
 .lead {
@@ -216,7 +222,7 @@ li {
   max-width: 100%;
   padding: 0;
   margin: 0;
-  background: #f0f5f6;
+  background: #f3f4ef; /* matches the graphic's own background so there is no visible seam */
   overflow: hidden;
 }
 
@@ -264,9 +270,9 @@ blockquote {
   margin: 2rem 0;
   padding: 1.25rem 1.5rem;
   border-left: 3px solid var(--accent);
-  background: #f4f8f9;
+  background: var(--accent-light);
   font-size: 1.02rem;
-  color: #333;
+  color: var(--navy);
   line-height: 1.7;
   border-radius: 0 4px 4px 0;
 }
@@ -276,7 +282,7 @@ blockquote cite {
   margin-top: 0.75rem;
   font-size: 0.9rem;
   font-style: normal;
-  color: #666;
+  color: var(--slate);
 }
 
 /* Social link */
@@ -301,12 +307,12 @@ blockquote cite {
 }
 
 .post-carousel::-webkit-scrollbar-track {
-  background: #eee;
+  background: var(--line);
   border-radius: 2px;
 }
 
 .post-carousel::-webkit-scrollbar-thumb {
-  background: #ccc;
+  background: var(--line-strong);
   border-radius: 2px;
 }
 
@@ -314,11 +320,11 @@ blockquote cite {
   flex: 0 0 280px;
   scroll-snap-align: start;
   background: #fff;
-  border: 1px solid #e8e8e8;
+  border: 1px solid var(--line);
   border-radius: 6px;
   padding: 1.25rem;
   text-decoration: none;
-  color: #111;
+  color: var(--navy);
   display: flex;
   flex-direction: column;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -326,9 +332,9 @@ blockquote cite {
 
 .post-card:hover {
   border-color: var(--accent);
-  box-shadow: 0 2px 8px rgba(79, 143, 155, 0.12);
+  box-shadow: 0 2px 8px rgba(20, 52, 64, 0.10);
   text-decoration: none;
-  color: #111;
+  color: var(--navy);
 }
 
 .post-card .post-tag {
@@ -355,7 +361,7 @@ blockquote cite {
 
 .carousel-hint {
   font-size: 0.85rem;
-  color: #666;
+  color: var(--slate);
   margin-top: 0.75rem;
 }
 
@@ -407,18 +413,18 @@ blockquote cite {
   flex-direction: column;
   padding: 1.25rem;
   background: #fff;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--line);
   border-radius: 6px;
   text-decoration: none;
-  color: #111;
+  color: var(--navy);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .tool-card:hover {
   border-color: var(--accent);
-  box-shadow: 0 2px 8px rgba(79, 143, 155, 0.1);
+  box-shadow: 0 2px 8px rgba(20, 52, 64, 0.08);
   text-decoration: none;
-  color: #111;
+  color: var(--navy);
 }
 
 .tool-label {
@@ -435,12 +441,12 @@ blockquote cite {
   font-weight: 600;
   margin-bottom: 0.4rem;
   margin-top: 0;
-  color: #111;
+  color: var(--navy);
 }
 
 .tool-desc {
   font-size: 0.9rem;
-  color: #555;
+  color: var(--slate);
   flex: 1;
   line-height: 1.5;
 }
@@ -469,11 +475,11 @@ blockquote cite {
 
 /* Footer */
 footer {
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--line);
   margin-top: 4rem;
   padding-top: 2rem;
   font-size: 0.9rem;
-  color: #666;
+  color: var(--slate);
   text-align: center;
 }
 
@@ -490,7 +496,7 @@ a:hover {
 /* Subscribe note */
 .subscribe-note {
   font-size: 0.75rem;
-  color: #666;
+  color: var(--slate);
   margin-top: 0.5rem;
 }
 
@@ -505,7 +511,7 @@ a:hover {
 .subscribe-form input[type="email"] {
   flex: 1;
   padding: 0.6rem 0.8rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--line-strong);
   border-radius: 4px;
   font-size: 0.95rem;
   font-family: inherit;
@@ -543,21 +549,21 @@ a:hover {
   display: flex;
   gap: 1rem;
   padding: 1.25rem 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--line);
   text-decoration: none;
-  color: #111;
+  color: var(--navy);
   transition: background 0.15s;
   align-items: flex-start;
 }
 
 .writing-entry:first-of-type {
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--line);
 }
 
 .writing-entry:hover {
   text-decoration: none;
-  color: #111;
-  background: #fafafa;
+  color: var(--navy);
+  background: var(--ivory);
 }
 
 .writing-thumb {
@@ -578,19 +584,19 @@ a:hover {
 
 .writing-entry time {
   font-size: 0.8rem;
-  color: #666;
+  color: var(--slate);
 }
 
 .writing-entry h3 {
   font-size: 1.05rem;
   font-weight: 600;
   margin: 0.15rem 0 0.25rem;
-  color: #111;
+  color: var(--navy);
 }
 
 .writing-entry p {
   font-size: 0.9rem;
-  color: #555;
+  color: var(--slate);
   margin-bottom: 0.25rem;
   line-height: 1.5;
 }
@@ -604,10 +610,10 @@ a:hover {
 /* Post page */
 .post-meta {
   font-size: 0.85rem;
-  color: #666;
+  color: var(--slate);
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--line);
 }
 
 .post-body {
@@ -624,17 +630,17 @@ a:hover {
 
 .post-body .image-caption {
   font-size: 0.8rem;
-  color: #666;
+  color: var(--slate);
   margin-top: -1rem;
   margin-bottom: 1.5rem;
 }
 
 .post-source {
   font-size: 0.8rem;
-  color: #666;
+  color: var(--slate);
   margin-top: 2rem;
   padding-top: 1rem;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--line);
 }
 
 .post-back {
@@ -654,12 +660,12 @@ a:hover {
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 0.25rem;
-  color: #111;
+  color: var(--navy);
 }
 
 .subscribe-mini p {
   font-size: 0.9rem;
-  color: #555;
+  color: var(--slate);
   margin-bottom: 0.75rem;
 }
 

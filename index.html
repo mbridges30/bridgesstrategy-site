@@ -6,7 +6,9 @@
   <meta name="description" content="Clear, proportionate AI guidance for nonprofits and mission-driven organizations. Readiness assessments, governance frameworks, and practical adoption planning.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://bridgesstrategy.com/">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="stylesheet" href="styles.css">
 
   <!-- Open Graph -->
@@ -214,7 +216,7 @@
         window.addEventListener('load', function() {
           calendar.schedulingButton.load({
             url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1DhYhU7qt-0PQnjmaq_OP8cguZDWdSy3pyowaHq5cX7lNvVZkGdsvh9-E0IVL7ACNCzgBDuTQr?gv=true',
-            color: '#4f8f9b',
+            color: '#2B676D',
             label: 'Book an appointment',
             target,
           });
@@ -251,7 +253,7 @@
       .then(function(r) { return r.json(); })
       .then(function(data) {
         if (msg) { msg.textContent = data.message || data.error; msg.style.display = 'block'; }
-        if (data.message) { input.value = ''; msg.style.color = '#3d7a85'; }
+        if (data.message) { input.value = ''; msg.style.color = '#2B676D'; }
         else { msg.style.color = '#e53e3e'; }
         btn.disabled = false;
         btn.textContent = 'Subscribe';

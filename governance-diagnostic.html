@@ -6,7 +6,9 @@
   <meta name="description" content="A free interactive assessment that evaluates your nonprofit's AI governance maturity across visibility, policy, accountability, and board readiness.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://bridgesstrategy.com/governance-diagnostic.html">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://bridgesstrategy.com/governance-diagnostic.html">
   <meta property="og:title" content="AI Governance Gap Diagnostic | Bridges Strategy">
@@ -18,9 +20,12 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --accent: #4f8f9b;
-      --accent-light: #e8f1f3;
-      --accent-hover: #3d7a85;
+      --navy: #143440;
+      --ivory: #F6F3EA;
+      --teal: #5B9799;            /* muted teal: decorative only, fails contrast as text */
+      --accent: #2B676D;          /* deep teal: links, text accents, buttons (6.4:1 on white) */
+      --accent-hover: #143440;    /* navy: hover / pressed */
+      --accent-light: #E5F0EC;
       --nascent: #c0392b;
       --emerging: #e67e22;
       --developing: #f1c40f;
@@ -31,9 +36,9 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       font-size: 18px;
       line-height: 1.7;
-      color: #111;
-      background: #f9fafa;
-      border-top: 3px solid var(--accent);
+      color: #143440;
+      background: #F6F3EA;
+      border-top: 3px solid var(--teal);
     }
 
     header, main, footer {
@@ -59,7 +64,7 @@
     .lead {
       font-size: 1.05rem;
       margin-top: 0.5rem;
-      color: #555;
+      color: #52636B;
     }
 
     .back-link {
@@ -75,7 +80,7 @@
       font-size: 1.3rem;
       font-weight: 600;
       margin-bottom: 1rem;
-      color: var(--accent);
+      color: var(--navy);
     }
 
     p { margin-bottom: 1rem; }
@@ -90,7 +95,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid #e0e0e0;
+      border-bottom: 1px solid #E3E7E8;
       background: #fff;
     }
     .site-nav .nav-brand {
@@ -106,7 +111,7 @@
     .site-nav .nav-links { display: flex; gap: 1.5rem; }
     .site-nav a {
       font-size: 0.95rem;
-      color: #555;
+      color: var(--navy);
       text-decoration: none;
     }
     .site-nav a:hover { color: var(--accent); }
@@ -134,8 +139,8 @@
       padding: 0.5rem 0.25rem;
       font-size: 0.75rem;
       font-weight: 600;
-      color: #999;
-      border-bottom: 3px solid #ddd;
+      color: #52636B;
+      border-bottom: 3px solid #CBD2D3;
       transition: color 0.3s, border-color 0.3s;
     }
 
@@ -160,13 +165,13 @@
       border-radius: 6px;
       margin-bottom: 1.5rem;
       font-size: 0.95rem;
-      color: #333;
+      color: #143440;
     }
 
     /* Question card */
     .question-card {
       background: #fff;
-      border: 1px solid #e8e8e8;
+      border: 1px solid #E3E7E8;
       border-radius: 6px;
       padding: 1.25rem;
       margin-bottom: 1.25rem;
@@ -176,7 +181,7 @@
       font-size: 1rem;
       font-weight: 600;
       margin-bottom: 0.75rem;
-      color: #111;
+      color: #143440;
     }
 
     .answer-options {
@@ -190,7 +195,7 @@
       align-items: flex-start;
       gap: 0.75rem;
       padding: 0.75rem 1rem;
-      border: 2px solid #e8e8e8;
+      border: 2px solid #E3E7E8;
       border-radius: 6px;
       cursor: pointer;
       transition: border-color 0.2s, background 0.2s;
@@ -218,13 +223,13 @@
     .answer-label {
       font-size: 0.95rem;
       line-height: 1.4;
-      color: #333;
+      color: #143440;
     }
 
     .answer-score {
       font-size: 0.75rem;
       font-weight: 600;
-      color: #999;
+      color: #52636B;
       text-transform: uppercase;
       letter-spacing: 0.03em;
     }
@@ -255,10 +260,10 @@
     }
     .btn-primary:hover {
       background: var(--accent-hover);
-      box-shadow: 0 2px 8px rgba(79, 143, 155, 0.3);
+      box-shadow: 0 2px 8px rgba(20, 52, 64, 0.25);
     }
     .btn-primary:disabled {
-      background: #ccc;
+      background: #CBD2D3;
       cursor: not-allowed;
       box-shadow: none;
     }
@@ -285,7 +290,7 @@
     /* Review panel */
     .review-domain {
       background: #fff;
-      border: 1px solid #e8e8e8;
+      border: 1px solid #E3E7E8;
       border-radius: 6px;
       padding: 1.25rem;
       margin-bottom: 1rem;
@@ -314,13 +319,13 @@
     .review-item {
       font-size: 0.9rem;
       padding: 0.4rem 0;
-      border-bottom: 1px solid #f0f0f0;
-      color: #333;
+      border-bottom: 1px solid #E3E7E8;
+      color: #143440;
     }
 
     .review-item:last-child { border-bottom: none; }
 
-    .review-item strong { color: #111; }
+    .review-item strong { color: #143440; }
 
     /* Results panel */
     .score-cards {
@@ -332,7 +337,7 @@
 
     .score-card {
       background: #fff;
-      border: 1px solid #e8e8e8;
+      border: 1px solid #E3E7E8;
       border-radius: 6px;
       padding: 1rem;
     }
@@ -340,13 +345,13 @@
     .score-card h3 {
       font-size: 0.9rem;
       font-weight: 600;
-      color: #555;
+      color: #52636B;
       margin-bottom: 0.5rem;
     }
 
     .score-bar-bg {
       height: 8px;
-      background: #eee;
+      background: #E3E7E8;
       border-radius: 4px;
       overflow: hidden;
       margin-bottom: 0.4rem;
@@ -367,7 +372,7 @@
       text-align: center;
       padding: 1.5rem;
       background: #fff;
-      border: 1px solid #e8e8e8;
+      border: 1px solid #E3E7E8;
       border-radius: 6px;
       margin-bottom: 2rem;
     }
@@ -380,7 +385,7 @@
 
     .overall-score .score-out-of {
       font-size: 1rem;
-      color: #999;
+      color: #52636B;
     }
 
     .overall-score .maturity-label {
@@ -396,7 +401,7 @@
     /* Report container */
     .report-container {
       background: #fff;
-      border: 1px solid #e8e8e8;
+      border: 1px solid #E3E7E8;
       border-radius: 6px;
       padding: 2rem;
       margin-bottom: 2rem;
@@ -415,7 +420,7 @@
 
     .report-container p {
       margin-bottom: 0.75rem;
-      color: #333;
+      color: #143440;
     }
 
     .report-container ul, .report-container ol {
@@ -425,7 +430,7 @@
 
     .report-container li {
       margin-bottom: 0.4rem;
-      color: #333;
+      color: #143440;
     }
 
     /* Loading state */
@@ -438,7 +443,7 @@
       display: inline-block;
       width: 40px;
       height: 40px;
-      border: 4px solid #eee;
+      border: 4px solid #E3E7E8;
       border-top: 4px solid var(--accent);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
@@ -451,7 +456,7 @@
     .loading-text {
       margin-top: 1rem;
       font-size: 0.95rem;
-      color: #666;
+      color: #52636B;
     }
 
     /* Error state */
@@ -474,11 +479,11 @@
 
     /* Footer */
     footer {
-      border-top: 1px solid #ddd;
+      border-top: 1px solid #CBD2D3;
       margin-top: 4rem;
       padding-top: 2rem;
       font-size: 0.9rem;
-      color: #888;
+      color: #52636B;
       text-align: center;
     }
 
@@ -488,13 +493,13 @@
     }
 
     .skip-notice {
-      background: #f4f4f4;
-      border: 1px dashed #ccc;
+      background: #F6F3EA;
+      border: 1px dashed #CBD2D3;
       border-radius: 6px;
       padding: 1rem 1.25rem;
       margin-bottom: 1.25rem;
       font-size: 0.95rem;
-      color: #666;
+      color: #52636B;
       display: none;
     }
 
@@ -1102,7 +1107,7 @@
         const isSkipped = card && card.classList.contains('hidden-conditional');
         const score = answers[q];
         if (isSkipped) {
-          html += '<div class="review-item" style="color:#999"><strong>' + questionLabels[q] + ':</strong> Skipped — no policy exists</div>';
+          html += '<div class="review-item" style="color:#52636B"><strong>' + questionLabels[q] + ':</strong> Skipped — no policy exists</div>';
         } else {
           const label = answerLabels[q][score];
           html += '<div class="review-item"><strong>' + questionLabels[q] + ':</strong> ' + label + '</div>';

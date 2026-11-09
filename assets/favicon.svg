@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#4f8f9b"/>
-  <text x="16" y="23" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" fill="#fff" text-anchor="middle">B</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Bridges Strategy"><rect width="64" height="64" fill="#143440"/><g fill="none" stroke="#5B9799" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15 C27 15 43 43 55 46"/><path d="M10 48 Q30 33 55 46"/><path d="M21 18.4758V41.9990"/><path d="M33 28.0569V39.9645"/></g></svg>
