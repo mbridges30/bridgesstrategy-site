@@ -94,10 +94,17 @@ section{margin-top:44px}
 .com{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--c);border-radius:10px;padding:20px}
 .com p{margin-top:8px;color:var(--muted)}
 footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
-/* The video is portrait (4:5), so it is centred and capped rather than stretched to the full column */
-.video{margin:0 auto;width:100%;max-width:440px}
-.video video{display:block;width:100%;height:auto;aspect-ratio:4/5;background:var(--sunk);border:1px solid var(--line);border-radius:12px}
-.video p{padding:16px}
+/* Primary path down the page, with the video as a quiet secondary option */
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px 22px;margin-top:22px}
+.go{display:inline-block;background:var(--ink);color:var(--bg);font-family:var(--display);font-weight:700;font-size:17px;padding:13px 22px;border-radius:10px;text-decoration:none}
+.go:hover{background:var(--p);color:var(--surface)}
+.watch{color:var(--ink);text-underline-offset:3px;padding:12px 2px;font-weight:500}
+/* Pop-up player. The video is portrait (4:5), so it is sized by the shorter of screen width and height. */
+dialog{padding:0;border:0;background:transparent;max-width:none;max-height:none;overflow:visible;color:inherit}
+dialog::backdrop{background:rgba(16,25,29,.78)}
+dialog video{display:block;width:min(92vw,calc(86vh*.8),560px);height:auto;aspect-ratio:4/5;background:#000;border-radius:12px}
+.vclose{position:absolute;top:8px;right:8px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(16,25,29,.72);color:#fff;font-size:28px;line-height:1;display:grid;place-items:center;z-index:1}
+body:has(dialog[open]){overflow:hidden}
 .contact{margin-top:44px}
 .contact a{color:var(--ink);text-underline-offset:3px}
 </style>
@@ -109,15 +116,13 @@ footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-si
       <p class="label">A concept for discussion</p>
       <h1 style="margin-top:10px">Skilled volunteering that works for everyone involved</h1>
       <p class="lead">Canadian nonprofits need professional skills they can't afford. Professionals want to give them. What's missing is a system that makes it easy for four partners at once: nonprofits, volunteers, companies and foundations.</p>
+      <div class="actions">
+        <a class="go" id="go" href="#h-partners">See what&rsquo;s in it for you</a>
+        <a class="watch" href="/assets/volunteering-concept.mp4" data-watch>&#9654;&#xFE0E; Watch the 75-second video</a>
+      </div>
     </div>
     <div class="map" id="map"></div>
   </div>
-
-  <figure class="video">
-    <video controls preload="metadata" playsinline width="1080" height="1350" src="/assets/volunteering-concept.mp4#t=0.001" aria-label="Video: Canadian skilled volunteering concept">
-      <p>Your browser can't play this video. <a href="/assets/volunteering-concept.mp4">Download it</a> instead.</p>
-    </video>
-  </figure>
 
   <section aria-labelledby="h-partners">
     <p class="label">Four partners</p>
@@ -149,10 +154,14 @@ footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-si
     <p class="note">Finished work goes back into the library as an example, with consent, so the next nonprofit starts further ahead.</p>
   </section>
 
-  <p class="contact">Mark Bridges, Bridges Strategy &middot; <a href="mailto:mark@bridgesstrategy.com">Get in touch</a></p>
+  <p class="contact">Mark Bridges, Bridges Strategy &middot; <a href="mailto:mark@bridgesstrategy.com">Get in touch</a> &middot; <a href="/assets/volunteering-concept.mp4" data-watch>Watch the video</a></p>
 
   <footer>This is a concept, not a product. It takes no position on whether the system should be built, licensed or run with existing organisations.</footer>
 </div>
+<dialog id="vd" aria-label="Video: Canadian skilled volunteering concept">
+  <button type="button" class="vclose" aria-label="Close video">&times;</button>
+  <video id="vid" controls playsinline preload="none" width="1080" height="1350"></video>
+</dialog>
 <script>
 const P = {
   foundations:{label:'Foundations', promise:'Help your grantees with more than a grant.', bring:'Funding that gives the organisations you choose access to skilled volunteers.', b:[
@@ -211,6 +220,33 @@ document.addEventListener('keydown',e=>{ const t=e.target.closest&&e.target.clos
 function fromHash(){ const h=location.hash.replace('#',''); if(P[h]) cur=h; render(); }
 window.addEventListener('hashchange',fromHash);
 fromHash();
+
+/* Video pop-up. It only loads when asked for, and plays at once because the visitor just clicked Watch. */
+(function(){
+  const dlg=$('vd'), vid=$('vid');
+  const open=e=>{
+    if(typeof dlg.showModal!=='function') return;   // no <dialog> support: the link opens the file itself
+    e.preventDefault();
+    if(!vid.getAttribute('src')) vid.src='/assets/volunteering-concept.mp4';
+    dlg.showModal();
+    const p=vid.play(); if(p&&p.catch) p.catch(()=>{});
+  };
+  document.querySelectorAll('[data-watch]').forEach(a=>a.addEventListener('click',open));
+  /* Every way of closing pauses the video explicitly; the close/cancel events are only a backup */
+  const stop=()=>vid.pause();
+  const shut=()=>{ stop(); dlg.close(); };
+  dlg.querySelector('.vclose').addEventListener('click',shut);
+  dlg.addEventListener('click',e=>{ if(e.target===dlg) shut(); });          // click outside the video
+  dlg.addEventListener('keydown',e=>{ if(e.key==='Escape') stop(); });      // the browser closes the dialog itself
+  dlg.addEventListener('cancel',stop);
+  dlg.addEventListener('close',stop);
+  /* "See what's in it for you": scroll to the partners without rewriting the #hash a visitor arrived with */
+  $('go').addEventListener('click',e=>{
+    const t=document.querySelector('section[aria-labelledby="h-partners"]'); if(!t) return;
+    e.preventDefault();
+    t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+  });
+})();
 </script>
 </body>
 </html>
